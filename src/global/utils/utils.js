@@ -6,9 +6,16 @@ const utils = {
         return false
     },
     debounce(func, interval){
-        let time = new Date()
-        
-        return func
-    }
+        if(interval === undefined) interval = 2000 // default interval
+        let lock = false
+        return function(){
+            if(lock) return
+            lock = true
+            func.apply(this,arguments)
+            setTimeout(() => {
+                lock = false
+            }, interval)          
+        }
+    },
 }
 export default utils
