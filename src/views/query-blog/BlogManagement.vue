@@ -20,7 +20,7 @@
     </el-card>
     <!-- 查询结果展示部分 -->
     <el-card class="article-list-card">
-      <el-table :data="articleList" tooltip-effect="dark" style="width: 100%" border @selection-change="handleSelectionChange">
+      <el-table :data="articleList" tooltip-effect="dark" class="article-list-table" border @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="40"></el-table-column>
         <el-table-column prop="blogTitle" label="标题" min-width="10"></el-table-column>
         <el-table-column prop="blogKeyWord" label="关键字" min-width="20"></el-table-column>
@@ -124,6 +124,14 @@ export default {
     width: 180px !important;
   }
   .article-list-card {
-    height: 70vh;
+    height: 68vh;
+  }
+  /deep/.article-list-card .el-card__body {
+    height: 100%;
+  }
+  .article-list-table {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
   }
 </style>

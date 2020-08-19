@@ -5,7 +5,7 @@
     </el-tooltip>
     <div v-if="!this.url" class="upload-box before-selecte-file" @click="selectFile()">
       <i class="el-icon-plus avatar-uploader-icon"></i>
-      <input ref="fileInput" v-show="false" type="file" @change="fileChangeHandler"/>
+      <input ref="fileInput" v-show="false" type="file" accept="image/*" @change="fileChangeHandler"/>
     </div>
     <div v-else class="upload-box after-selecte-file">
       <label v-if= "downloadUrl" class="success-label">
@@ -18,7 +18,7 @@
         <i class="el-icon-zoom-in" @click="showDialog()"></i>
         <i class="el-icon-delete" @click="deleteFile()"></i>
       </div>
-      <input ref="fileInput" v-show="false" type="file" @change="fileChangeHandler"/>
+      <input ref="fileInput" v-show="false" type="file" accept="image/*" @change="fileChangeHandler"/>
     </div>
     <el-dialog :visible.sync="dialogVisible" width="500px" :close-on-click-modal = "false">
       <template #title>
