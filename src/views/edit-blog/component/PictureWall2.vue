@@ -69,7 +69,7 @@ export default {
       data.append('file',this.currentFile.raw)
       data.append('name',this.currentFile.name)
       /* eslint-disable */
-      request(data,{url: evnConfig.uploadFileUrl + '/' + this.id}).then(() => {
+      request(data,{url: evnConfig.fileUploadUrl + '/' + this.id}).then(() => {
         this.$message.success('上传成功')
         // this.dialogVisible = false
         // this.currentFile.name = this.currentImgName

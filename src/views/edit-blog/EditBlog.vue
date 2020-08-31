@@ -24,6 +24,7 @@ import request from '@/request/commonRequest.js'
 import utils from '@/global/utils/utils'
 import pictureWall from './component/PictureWall'
 import {Pic} from '@/assets/globalConsts.js'
+import {blogHandleApi} from '@/api/apis.js'
 
 
 export default {
@@ -86,13 +87,12 @@ export default {
       this.blogObject.content = this.$refs.editor.getMarkdown()
       let requestData = JSON.parse(JSON.stringify(this.blogObject))
       requestData.user = 'xuecl'
-      requestData.operation = 'save'
-      request(requestData).then(() => {
+      request(new blogHandleApi('save',requestData)).then(() => {
         this.$message.success('保存成功！')
       })
     },
     refresh(){
-      request({operation: 'queryById', id: this.id}).then(({blogObject}) => {
+      request(new blogHandleApi('queryById', {id: this.id})).then(({blogObject}) => {
         this.blogObject = {
           id: blogObject.id,
           title: blogObject.blogTitle,
@@ -104,8 +104,8 @@ export default {
        /* eslint-disable */
        this.fileList = []
         blogObject.fileList.forEach(element => {
-          let arrayTmp = element.split('/')
-          let filename = arrayTmp[arrayTmp.length - 1]
+          let arrayTmp = element.split('=')
+          let filename = decodeURIComponent(arrayTmp[arrayTmp.length - 1])
           let pic = new Pic()
           pic.downloadUrl = evnConfig.baseUrl + element
           pic.uploadName = filename

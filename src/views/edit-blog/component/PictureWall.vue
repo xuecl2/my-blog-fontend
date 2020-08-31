@@ -46,21 +46,22 @@ export default {
       data.append('file',fileObject.file)
       data.append('name',fileObject.filename)
       /* eslint-disable */
-      request(data,{url: evnConfig.uploadFileUrl + '/' + this.id}).then(data => {
+      request(data, {url: evnConfig.fileUploadUrl + '/' + this.id}).then(data => {
         this.$message.success('上传成功')
         this.fileList[index].uploadName = fileObject.name
         this.fileList[index].downloadUrl = evnConfig.baseUrl + data.url
       })
-      /* eslint-enable */
+      
     },
     deleteFile(fileObject){
       let index = fileObject.index
       if(!fileObject.downloadUrl) return this.removeUploader(index) 
-      request({operation: 'deleteFile',filename: fileObject.filename, id: this.id}).then(() => {
+      request({filename: fileObject.filename, id: this.id}, {url: evnConfig.fileDeleteUrl}).then(() => {
         this.$message.success('文件删除成功！')
         this.removeUploader(index)
       })
     },
+    /* eslint-enable */
     removeUploader(index){
       this.fileList = [...this.fileList.slice(0,index),...this.fileList.slice(index + 1,this.fileList.length)]
     },

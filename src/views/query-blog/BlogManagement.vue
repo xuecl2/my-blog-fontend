@@ -47,6 +47,7 @@
 // import '@toast-ui/editor/dist/toastui-editor.css'; // Editor's Style
 import request from '@/request/commonRequest'
 import BlogModificationDialog from './component/BlogModificationDialog'
+import {blogHandleApi} from '@/api/apis.js'
 
 export default {
   name: 'BlogManagement',
@@ -69,8 +70,7 @@ export default {
   methods: {
     query() {
       let requestData = JSON.parse(JSON.stringify(this.queryParams))
-      requestData.operation = 'query'
-      request(requestData).then(data => {
+      request(new blogHandleApi('query'), requestData).then(data => {
         this.articleList = data.resultList
         if(this.articleList.length == 0){
           this.$message.warning('无满足条件的记录')
@@ -91,11 +91,7 @@ export default {
       this.dialogVisible = true
     },
     remove() {
-      let requestData = {
-        id: this.currentSelection[0].id,
-        operation: 'delete'
-      }
-      request(requestData).then(() => {
+      request(new blogHandleApi('delete', {id: this.currentSelection[0].id})).then(() => {
         this.$message.success('删除成功')
         this.query()
       })
