@@ -8,7 +8,8 @@ Vue.use(VueRouter)
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    redirect: '/blog/list'
   },
   {
     path: '/about',
@@ -34,7 +35,33 @@ Vue.use(VueRouter)
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "edit" */ '../views/edit-blog/EditBlog.vue')
-  }
+  },  
+  {
+    path: '/blog/list',
+    name: 'BlogList',
+    component: () => import(/* webpackChunkName: "edit" */ '../views/blog/blog-list/BlogList.vue')
+  },
+  {
+    path: '/blog/',
+    redirect: '/blog/list'
+  },
+  {
+    path: '/blog/view',
+    name: 'BlogList',
+    props: true,
+    component: () => import(/* webpackChunkName: "edit" */ '../views/blog/blog-view/BlogView.vue')
+  },
+  {
+    path: '/blog/edit',
+    name: 'BlogList',
+    props: true,
+    component: () => import(/* webpackChunkName: "edit" */ '../views/blog/blog-edit/BlogEdit.vue')
+  },
+  {
+    path: '/checklist/',
+    name: 'CheckList',
+    component: () => import(/* webpackChunkName: "edit" */ '../views/check-list/CheckList.vue')
+  },
 ]
 
 const router = new VueRouter({

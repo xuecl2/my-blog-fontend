@@ -10,7 +10,7 @@
 // @ is an alias to /src
 import request from '@/request/commonRequest.js'
 import uploader from '@/components/MyUploader.vue'
-import {Pic} from '@/assets/globalConsts.js'
+import {Pic} from '@/global/globalConsts.js'
 
 export default {
   name: 'PictureWall',

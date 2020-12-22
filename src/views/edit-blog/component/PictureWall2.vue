@@ -24,7 +24,7 @@
 <script>
 // @ is an alias to /src
 import request from '@/request/commonRequest.js'
-// import utils from '@/global/utils/utils'
+// import utils from '@/global/utils/commonUtils'
 
 export default {
   name: 'PictureWall',

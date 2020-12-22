@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import {
     Button, Select, Message, Card, Input, Form, FormItem, Table, DatePicker, TableColumn,
-    Row, Col, Dialog, Upload, Tooltip, MessageBox
+    Row, Col, Dialog, Upload, Tooltip, MessageBox, Tabs, TabPane
 } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -21,5 +21,7 @@ Vue.component(Dialog.name, Dialog)
 Vue.component(Upload.name, Upload) 
 Vue.component(Tooltip.name, Tooltip) 
 Vue.component(MessageBox.name, MessageBox) 
+Vue.component(Tabs.name, Tabs)
+Vue.component(TabPane.name, TabPane)
 Vue.prototype.$message = Message
 Vue.prototype.$msgbox = MessageBox

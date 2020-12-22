@@ -21,9 +21,9 @@
 import TuiEditor from '@/components/TuiEditor.vue'
 import TuiViewer from '@/components/TuiViewer.vue'
 import request from '@/request/commonRequest.js'
-import utils from '@/global/utils/utils'
+import utils from '@/utils/commonUtils'
 import pictureWall from './component/PictureWall'
-import {Pic} from '@/assets/globalConsts.js'
+import {Pic} from '@/global/globalConsts.js'
 import {blogHandleApi} from '@/api/apis.js'
 
 
