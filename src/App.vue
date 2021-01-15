@@ -3,8 +3,8 @@
     <el-card v-if="$store.getters.clinetScreenSizeType==='PC'">
       <header class="header-pc">
         <div class="col-20">
-          <router-link class="tab" to="blog">webLog</router-link>
-          <router-link class="tab" to="blog">checkList</router-link>
+          <router-link class="tab" to="/blog">webLog</router-link>
+          <router-link class="tab" to="/blog">checkList</router-link>
         </div>            
         <div class="logo">xuecl</div>
       </header>      
@@ -12,7 +12,7 @@
     <el-card v-else>
       
     </el-card>
-    <article class="article">
+    <article>
       <router-view/>
     </article>    
   </div>
@@ -30,9 +30,6 @@ export default {
     window.onresize = () => this.$store.commit('setClinetScreenSizeType', window.innerWidth)
   },
   methods: {
-    handleClick(tab, event){
-      console.log(tab, event)
-    },
   }
 }
 </script>

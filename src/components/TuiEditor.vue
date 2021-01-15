@@ -39,6 +39,7 @@ export default {
     plugins: {type: Array, default: ()=> [codeSyntaxHightlight,{hljs}]},
     foucsHandler: {type: Function, default: () => () => {}},
     blurHandler: {type: Function, default: () => () => {}},
+    imgUploadHandler: {type: Function, default: null},
   },
   mounted(){
     // 初始化tui-editor
@@ -50,9 +51,9 @@ export default {
       initialEditType: this.initialEditType,
       plugins: this.plugins,
     })  
-    this.editor.addHook('focus',this.foucsHandler)
-    this.editor.addHook('blur',this.blurHandler)
-
+    this.editor.on('focus',this.foucsHandler)
+    this.editor.on('blur',this.blurHandler)
+    if(this.imgUploadHandler) this.editor.addHook('addImageBlobHook', this.imgUploadHandler)
   },
   methods:{
     getMarkdown(){
