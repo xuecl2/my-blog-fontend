@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
-    "@toast-ui/editor": "^2.1.0-alpha.2",
+    "@toast-ui/editor": "^2.2.0",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^1.0.0",
     "@toast-ui/editor-plugin-color-syntax": "^1.0.0",
     "axios": "^0.19.2",
