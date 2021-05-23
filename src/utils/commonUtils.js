@@ -1,6 +1,6 @@
 import { errCode } from '@/global/globalConsts.js'
-import { Message } from 'element-ui'
 import axios from 'axios'
+import toast from '../components/bs-toast';
 
 const utils = {
   isBlank(value) {
@@ -40,7 +40,7 @@ const utils = {
       // Something happened in setting up the request that triggered an Error
       console.log('Error', error.message);
     }
-    Message.error(error.message)
+    toast.toast(error.message)
     let err = new Error('request failed')
     err.errType = errCode.reqFailed
     throw err

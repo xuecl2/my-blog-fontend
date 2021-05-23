@@ -29,7 +29,7 @@
         <el-form-item label = "图片名" style = "margin-bottom: 5px">
           <el-input placeholder="请输入要上传的图片名" size = "mini" v-model="filename"></el-input>
         </el-form-item>        
-        <el-button size = "mini" type = "primary" style = "vertical-align: -10px" @click="upload()">上传</el-button>
+        <button class="btn btn-primary btn-sm" style = "vertical-align: -10px" @click="upload()">上传</button>
       </el-form>      
       <span v-if= "downloadUrl">{{downloadUrl}}</span>
       <img width="100%" :src="url" alt="图片加载失败" style = "margin-top: 10px">
@@ -40,6 +40,7 @@
 <script>
 // 自定义的图片上传组件
 // @ is an alias to /src
+
 
 export default {
   name: 'MyUploader',

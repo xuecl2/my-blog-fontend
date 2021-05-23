@@ -36,7 +36,7 @@ module.exports = {
         //   warnForDuplicates:false
         // },
         "postcss-px-to-viewport": {
-            viewportWidth: 1366, // (Number) 视窗的宽度，对应的是我们设计稿的宽度
+            viewportWidth: 1536, // (Number) 视窗的宽度，对应的是我们设计稿的宽度
             viewportHeight: 768, // (Number) 视窗的高度，对应的是我们设计稿的高度
             unitPrecision: 3, // (Number) 指定`px`转换为视窗单位值的小数位数（很多时候无法整除）
             viewportUnit: "vw", // (String) 指定需要转换成的视窗单位，建议使用vw

@@ -1,6 +1,6 @@
 import errorCodeUtils from '@/utils/errorCodeUtils'
-import {Message} from 'element-ui'
 import axios from 'axios'
+import toast from '../components/bs-toast';
 
 export function axiosRequestErrorHandler(error) {
     if (axios.isCancel(error)) {
@@ -29,6 +29,6 @@ export function axiosRequestErrorHandler(error) {
 export function commonRequestErrorHandler(error) {    
     let err = axiosRequestErrorHandler(error)
     console.log(err)
-    Message.error(error.message)
+    toast.error(error.message)
     throw err
 }

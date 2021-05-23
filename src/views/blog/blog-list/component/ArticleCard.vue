@@ -1,10 +1,12 @@
 <template>
   <div class="article-card-container">
-    <el-card class="article-card" v-for="item in articleList" :key="item.id" @click.native="articleView(item.id)">
-      <div class="title">{{item.blogTitle}}</div>
-      <div class="time">{{item.createDate}}</div>
-      <div class="digest">{{item.blogDigest}}</div>
-    </el-card>
+    <div class="card article-card mb-1"  v-for="item in articleList" :key="item.id" @click="articleView(item.id)">
+      <div class="card-body">
+        <div class="content-title">{{item.blogTitle}}</div>
+        <div class="time">{{item.createDate}}</div>
+        <div class="digest">{{item.blogDigest}}</div>
+      </div>
+    </div>
   </div>
 </template>
 

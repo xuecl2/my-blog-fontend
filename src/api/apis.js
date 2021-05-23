@@ -10,7 +10,6 @@ class blogHandleApi {
 class dataSyncApi {
     constructor() {
         this.tradeCode = 'dataSync'
-        
     }
 }
 

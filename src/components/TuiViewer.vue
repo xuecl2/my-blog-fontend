@@ -1,10 +1,13 @@
 <template>
-    <div class="container">
-      <div ref="viewer" v-show="false"></div>  
-      
-      <div ref="article" class='tui-editor-contents col-16'></div>  
-      <div class="js-toc col-7"></div>
+  <div class="row">
+    <div ref="viewer" v-show="false"></div>  
+    <div class="col-9">
+      <div ref="article" class='article-viewer-container tui-editor-contents'></div>  
     </div>
+    <div class="col-3">
+      <div class="toc position-sticky start-0"></div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -13,21 +16,18 @@
 // import Viewer from 'tui-editor/dist/tui-editor-Viewer';
 import Editor from '@toast-ui/editor';
 import codeSyntaxHightlight from '@toast-ui/editor-plugin-code-syntax-highlight';
-import 'codemirror/lib/codemirror.css'; // Editor's Dependency Style
-import '@toast-ui/editor/dist/toastui-editor.css'; // Editor's Style
 import hljs from 'highlight.js'; // The code-syntax-highlight plugin has highlight.js as a dependency
-import 'highlight.js/styles/github.css'; // HighLight.js' Dependency Style
+
 import tocbot from 'tocbot'
-// import 'tocbot/dist/tocbot.css'
-import 'tocbot/dist/styles.css'
+
 
 export default {
   name: 'TuiEditor',
   data(){
     return{
       viewer: null,
-      headdingselect: ['h1','h2','h3','h4','h5','h6'],
-      articleContalnerClassName: 'tui-editor-contents'
+      headdingselect: ['h1','h2','h3'],
+      articleContalnerClassName: 'article-viewer-container'
     }
   },
   props:{
@@ -52,19 +52,34 @@ export default {
   methods:{
     setMarkdown(markdownString){
       this.viewer.setMarkdown(markdownString)
+      this.$nextTick(() => {
+        this.getToc()
+      })
     },
     getToc() {
       this.$refs.article.innerHTML = this.viewer.getHtml()
       this.addIdOnHeader()
       tocbot.init({
         // Where to render the table of contents.
-        tocSelector: '.js-toc',
+        tocSelector: '.toc',
         // Where to grab the headings to build the table of contents.
         contentSelector: '.' + this.articleContalnerClassName,
         // Which headings to grab inside of the contentSelector element.
         headingSelector: this.headdingselect.join(','),
         // For headings inside relative or absolute positioned containers within content.
         hasInnerContainers: true,
+        // Class to add to list items.
+        listItemClass: 'toc-list-item',
+        // Class to add to active list items.
+        activeListItemClass: 'is-active-li',
+        // How many heading levels should not be collapsed.
+        // For example, number 6 will show everything since
+        // there are only 6 heading levels and number 0 will collapse them all.
+        // The sections that are hidden will open
+        // and close as you scroll to headings within them.
+        collapseDepth: 0,
+        headingsOffset: 40,
+        scrollSmoothOffset: -40
       })
     },
     addIdOnHeader() {
@@ -79,12 +94,8 @@ export default {
 </script>
 
 <style scoped>
-  .container{
-    display: flex;
-  }
-
-  .js-toc {
-    margin-left: 40px;
-    border-left: 1px solid black;
-  }
+  .toc {
+    height: auto;
+    top: 40px;
+  } 
 </style>

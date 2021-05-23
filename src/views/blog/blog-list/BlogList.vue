@@ -1,14 +1,16 @@
 <template>  
   <div class="container">
-    <div class="col-18 article">
+    <div class="col-9 me-4 article">
       <article-card :articleList="blogList" @article-view="toBlogView"></article-card>
     </div>
-    <el-card class="col-6 index" v-if="$store.getters.clinetScreenSizeType==='PC'">
-      <el-input placeholder="请输入搜索条件" v-model="queryCondition"></el-input>
-      <el-button type="primary" icon="el-icon-search" size="mini" @click="queryBlogList">搜索</el-button>
-      <br/>
-      <a href="#">网站开发记录</a>
-    </el-card>
+    <div class="card col-3 index">
+      <div class="card-body">
+        <input placeholder="请输入搜索条件" v-model="queryCondition"/>
+        <button class="btn btn-primary btn-sm" @click="queryBlogList">搜索<i class="fa fa-search"></i></button>
+        <br/>
+        <a href="#">网站开发记录</a>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -36,7 +38,7 @@ export default {
       request(new queryBlogListRequest(this.queryParams)).then(data => {
         this.blogList = data.resultList
         if(this.blogList.length == 0){
-          this.$message.warning('无满足条件的记录')
+          this.$toast.warning('无满足条件的记录')
         }
       })
     },
@@ -49,8 +51,6 @@ export default {
 
 <style scoped>
   .container {
-    width: 1024px;
-    margin: 0 auto;
     display: flex;
   }
 </style>

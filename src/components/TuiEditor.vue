@@ -9,8 +9,7 @@
 // @ is an alias to /src
 import Editor from '@toast-ui/editor';
 import codeSyntaxHightlight from '@toast-ui/editor-plugin-code-syntax-highlight';
-import 'codemirror/lib/codemirror.css'; // Editor's Dependency Style
-import '@toast-ui/editor/dist/toastui-editor.css'; // Editor's Style
+
 
 // for using editor-plugin-code-syntax-highlight plugin, You need to import the language files you want to use in the code block and register them in the hightlight.js object. A list of available language files can be found here.
 // Step 1. Import highlight.js

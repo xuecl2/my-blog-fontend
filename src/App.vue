@@ -1,17 +1,16 @@
 <template>  
   <div id="app">
-    <el-card v-if="$store.getters.clinetScreenSizeType==='PC'">
-      <header class="header-pc">
-        <div class="col-20">
-          <router-link class="tab" to="/blog">webLog</router-link>
-          <router-link class="tab" to="/blog">checkList</router-link>
-        </div>            
-        <div class="logo">xuecl</div>
-      </header>      
-    </el-card>
-    <el-card v-else>
-      
-    </el-card>
+    <div class="card">
+      <div class="card-body">
+        <header class="header-pc">
+          <div class="col-20">
+            <router-link class="tab" to="/blog">webLog</router-link>
+            <router-link class="tab" to="/blog">checkList</router-link>
+          </div>            
+          <div class="logo">xuecl</div>
+        </header>    
+      </div>
+    </div>
     <article>
       <router-view/>
     </article>    

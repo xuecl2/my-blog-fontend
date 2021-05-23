@@ -3,14 +3,16 @@
     <div class="header">
       <h1 class="title">{{blogObject.title}}</h1>
       <div class="button-row" v-show="true">
-        <el-button type="primary" size="mini" icon="fa fa-edit" @click.native="dialogVisible=true"> 修改</el-button>
-        <el-button type="primary" size="mini" icon="fa fa-edit" @click.native="edit()"> 编辑</el-button>
-        <el-button type="primary" size="mini" icon="fa fa-trash" @click.native="remove()"> 删除</el-button>
+        <button class="btn btn-primary btn-sm" @click="dialogVisible=true"><i class="fa fa-edit"></i> 修改</button>
+        <button class="btn btn-primary btn-sm" @click="edit()"><i class="fa fa-edit"></i> 编辑</button>
+        <button class="btn btn-primary btn-sm" @click="remove()"><i class="fa fa-trash"></i> 删除</button>
       </div>
     </div>
-    <el-card>
-      <tui-viewer ref="editor"></tui-viewer>
-    </el-card>
+    <div class="card">
+      <div class="card-body">
+        <tui-viewer ref="editor"></tui-viewer>
+      </div>
+    </div>
     <blog-modification-dialog :dialogVisible="dialogVisible" @close-dialog="closeDialog" 
       :blogObject="blogObject" @refresh="refresh"></blog-modification-dialog>
   </div>
@@ -44,7 +46,7 @@ export default {
   },
   created(){
     if(utils.isBlank(this.id)) {
-      this.$message.error('id为空，请重新发起请求')
+      this.$toast.error('id为空，请重新发起请求')
       return
     }
     this.refresh()
@@ -60,9 +62,6 @@ export default {
           digest: blogObject.blogDigest,
         }
         this.$refs.editor.setMarkdown(this.blogObject.content)
-        this.$nextTick(() => {
-          this.$refs.editor.getToc()
-        })
       })
     },
     closeDialog() {
@@ -73,7 +72,7 @@ export default {
     },
     remove() {
       request(new deleteBlog({id: this.id})).then(() => {
-        this.$message.success('删除成功')
+        this.$toast.success('删除成功')
         this.$router.push({name:'BlogList'})
       })
     }
@@ -82,7 +81,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style scoped>
   .container {
     width: 1024px;
     margin: 0 auto;

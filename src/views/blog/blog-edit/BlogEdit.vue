@@ -3,21 +3,20 @@
     <div class="header">
       <h1 class="title">{{ blogObject.title }}</h1>
       <div class="button-row" v-show="true">
-        <el-button
-          type="primary"
-          size="mini"
+        <button class="btn btn-primary btn-sm"
           icon="fa fa-save"
-          @click.native="dialogVisible = true"
+          @click="dialogVisible = true"
         >
-          保存</el-button
-        >
-        <el-button
-          type="primary"
-          size="mini"
+          保存
+          <i class="fa fa-save"></i>
+          </button>
+        <button class="btn btn-primary btn-sm"
           icon="fa fa-back"
-          @click.native="back()"
+          @click="dialogVisible = true"
         >
-          返回</el-button
+          返回
+          <i class="fa fa-save"></i>
+          </button>
         >
       </div>
     </div>
@@ -27,11 +26,6 @@
       :blurHandler="tuiBlurHandler"
       :imgUploadHandler="tuiImgUploadHandler"
     ></tui-editor>
-    <picture-wall
-      ref="picWall"
-      :id="blogObject.id"
-      :serverPicList="fileList"
-    ></picture-wall>
   </div>
 </template>
 
@@ -40,7 +34,6 @@
 import TuiEditor from "@/components/TuiEditor.vue";
 import request from "@/request/commonRequest.js";
 import utils from "@/utils/commonUtils";
-import pictureWall from "./component/PictureWall.vue";
 import { Pic } from "@/global/globalConsts.js";
 import { queryDetailBlogInfo } from "@/api/blog.js";
 import { saveBlog } from "@/api/blog.js";
@@ -50,7 +43,6 @@ export default {
   name: "EditBlog",
   components: {
     TuiEditor,
-    pictureWall,
   },
   data() {
     return {
@@ -65,7 +57,7 @@ export default {
   computed: {},
   created() {
     if (utils.isBlank(this.id)) {
-      this.$message.error("id为空，请重新发起请求");
+      this.$toast.error("id为空，请重新发起请求");
       return;
     }
     this.refresh();
@@ -73,9 +65,7 @@ export default {
   beforeRouteLeave(to, from, next) {
     let leaveFlag = this.submitCompletedCheck();
     if (!leaveFlag) {
-      this.$msgbox
-        .confirm("有更改内容或图片未提交，确认离开此页面?")
-        .then(() => next());
+      this.$message('有更改内容或图片未提交，确认离开此页面?').then(() => next());
       return;
     }
     next();
@@ -92,7 +82,8 @@ export default {
       let requestData = JSON.parse(JSON.stringify(this.blogObject));
       requestData.user = "xuecl";
       request(new saveBlog(requestData)).then(() => {
-        this.$message.success("保存成功！");
+        console.log(this)
+        this.$toast.success("保存成功！");
       });
     },
     refresh() {
@@ -135,37 +126,30 @@ export default {
       window.removeEventListener("keydown", this.tuiSaveShortcutsReplace, true);
     },
     tuiImgUploadHandler(file) {
-      console.log(file)
       let fileObject = {
         filename: file.name + new Date().getTime() + (Math.random() * 1000000).toFixed() ,
         file: file
       }
-      const loading = this.$loading.service({
-        lock: true,
-        text: 'Loading',
-        spinner: 'el-icon-loading',
-        background: 'rgba(0, 0, 0, 0.7)'
-      })
+      this.$loading.show()
       request(new uploadFile({...fileObject,id: this.id})).then(data => {
-        data
         /* eslint-disable */
         // 加上图片的文本后，编辑器在加载图片的一瞬间游标的位置会变的很奇怪(后面随便手动输入点东西就能恢复)。下面代码的最后加上空格是为了解决这个问题，具体原因尚不清楚
         this.$refs.editor.setMarkdown(this.$refs.editor.getMarkdown() + utils.getImgMarkdownString(evnConfig.baseUrl + data.url, file.name) + ' ')
         /* eslint-enable */
-        loading.close()
+        this.$loading.hide()
       }).catch( () => {
-        this.$nextTick(() => {loading.close()})
+        this.$nextTick(() => {this.$loading.hide()})
       })
     },
     submitCompletedCheck() {
       let flag = true;
-      const fileList = this.$refs.picWall.fileList.slice(0, -1);
-      for (let i = 0; i < fileList.length; i++) {
-        if (!fileList[i].downloadUrl) {
-          flag = false;
-          break;
-        }
-      }
+      // const fileList = this.$refs.picWall.fileList.slice(0, -1);
+      // for (let i = 0; i < fileList.length; i++) {
+      //   if (!fileList[i].downloadUrl) {
+      //     flag = false;
+      //     break;
+      //   }
+      // }
       const blogContent = this.$refs.editor.getMarkdown();
       if (blogContent !== this.blogObject.content) {
         flag = false;
