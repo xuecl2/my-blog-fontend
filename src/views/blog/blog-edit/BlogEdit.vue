@@ -2,22 +2,9 @@
   <div class="container">
     <div class="header">
       <h1 class="title">{{ blogObject.title }}</h1>
-      <div class="button-row" v-show="true">
-        <button class="btn btn-primary btn-sm"
-          icon="fa fa-save"
-          @click="dialogVisible = true"
-        >
-          保存
-          <i class="fa fa-save"></i>
-          </button>
-        <button class="btn btn-primary btn-sm"
-          icon="fa fa-back"
-          @click="dialogVisible = true"
-        >
-          返回
-          <i class="fa fa-save"></i>
-          </button>
-        >
+      <div class="btn-group btn-row mb-1" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary" @click="save()">保存</button>
+        <button type="button" class="btn btn-primary" @click="back()">返回</button>
       </div>
     </div>
     <tui-editor
@@ -65,7 +52,7 @@ export default {
   beforeRouteLeave(to, from, next) {
     let leaveFlag = this.submitCompletedCheck();
     if (!leaveFlag) {
-      this.$message('有更改内容或图片未提交，确认离开此页面?').then(() => next());
+      this.$message('有更改内容或图片未提交，确认离开此页面?', {buttonClose: true}).then(() => next());
       return;
     }
     next();
@@ -179,5 +166,9 @@ export default {
   position: absolute;
   right: 0;
   bottom: 0;
+}
+.btn-row {
+  display: block;
+  text-align: right;
 }
 </style>

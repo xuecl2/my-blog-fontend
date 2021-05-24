@@ -1,19 +1,22 @@
 <template>  
   <div id="app">
-    <div class="card">
-      <div class="card-body">
-        <header class="header-pc">
-          <div class="col-20">
-            <router-link class="tab" to="/blog">webLog</router-link>
-            <router-link class="tab" to="/blog">checkList</router-link>
-          </div>            
-          <div class="logo">xuecl</div>
-        </header>    
+    <header class="p-3 bg-dark bg-gradient text-white shadow position-fixed top-0 w-100">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <router-link class="nav-link px-2 text-white" to="/blog">webLog</router-link>
+            <router-link class="nav-link px-2 text-white" to="/blog">checkList</router-link>
+            <router-link class="nav-link px-2 text-white" to="/blog">diary</router-link>
+          </ul>
+          <div class="text-end">
+            <button type="button" class="btn btn-outline-light me-2">Login</button>
+          </div>
+        </div>
       </div>
-    </div>
+    </header>
     <article>
       <router-view/>
-    </article>    
+    </article> 
   </div>
 </template>
 
@@ -21,15 +24,6 @@
 
 export default {
   name: 'App',  
-  data(){
-    return {
-    }
-  },
-  created() {
-    window.onresize = () => this.$store.commit('setClinetScreenSizeType', window.innerWidth)
-  },
-  methods: {
-  }
 }
 </script>
 
@@ -38,32 +32,10 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // text-align: center;
-  color: #2c3e50;
+  padding-top: 100px;
 }
-header.header-pc {
-  display: flex;
-  height: 60px;
-  line-height: 60px;
-  font-size: 24px;
-  color: #FFF;  
-  background: linear-gradient(#5E5E5E,#bbb);
-}
-.header-pc div:first-child {
-  padding-left: 40px;
-}
-.tab {
-  margin:0 20px;
-  color: #FFF; 
-  text-decoration: none;
-}
-.logo {
-  margin-right: 20px;
-  text-align: right;
-  flex-grow: 1;
-}
-.article {
-  width: 1024px;
-  margin: 0 auto;
+header {
+  font-size: 1.2em;
+  z-index: 10;
 }
 </style>

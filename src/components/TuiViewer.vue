@@ -17,7 +17,6 @@
 import Editor from '@toast-ui/editor';
 import codeSyntaxHightlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import hljs from 'highlight.js'; // The code-syntax-highlight plugin has highlight.js as a dependency
-
 import tocbot from 'tocbot'
 
 
@@ -93,9 +92,26 @@ export default {
 }
 </script>
 
+// <style scoped src="codemirror/lib/codemirror.css"></style>
+// <style scoped src="@toast-ui/editor/dist/toastui-editor.css"></style>
+// <style scoped src="codemirror/lib/codemirror.css"></style>
+// <style scoped src="highlight.js/styles/github.css"></style>
+// <style scoped src="tocbot/dist/styles.css"></style>
+// <style scoped src="tocbot/dist/tocbot.css"></style>
+
 <style scoped>
   .toc {
     height: auto;
     top: 40px;
+    font-size: 1.3em;
   } 
+  /deep/ pre {
+    background: #2b2b2b;
+    color: #eeeeee;
+    border-radius: 6px;
+    margin-top: 15px;
+  }
+  /deep/ .tui-editor-contents h1, /deep/ .tui-editor-contents h2 {
+    border-bottom: none;
+  }
 </style>

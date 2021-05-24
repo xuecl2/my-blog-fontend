@@ -2,11 +2,16 @@
   <div class='container'>
     <div class="header">
       <h1 class="title">{{blogObject.title}}</h1>
-      <div class="button-row" v-show="true">
+      <div class="btn-group btn-row mb-1" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-primary" @click="dialogVisible=true">修改</button>
+        <button type="button" class="btn btn-primary" @click="edit()">编辑</button>
+        <button type="button" class="btn btn-primary" @click="remove()">删除</button>
+      </div>
+      <!-- <div class="button-row" v-show="true">
         <button class="btn btn-primary btn-sm" @click="dialogVisible=true"><i class="fa fa-edit"></i> 修改</button>
         <button class="btn btn-primary btn-sm" @click="edit()"><i class="fa fa-edit"></i> 编辑</button>
         <button class="btn btn-primary btn-sm" @click="remove()"><i class="fa fa-trash"></i> 删除</button>
-      </div>
+      </div> -->
     </div>
     <div class="card">
       <div class="card-body">
@@ -101,5 +106,9 @@ export default {
     position: absolute;
     right: 0;
     bottom: 0;
+  }
+  .btn-row {
+    display: block;
+    text-align: right;
   }
 </style>

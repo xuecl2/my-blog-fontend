@@ -14,7 +14,7 @@ import codeSyntaxHightlight from '@toast-ui/editor-plugin-code-syntax-highlight'
 // for using editor-plugin-code-syntax-highlight plugin, You need to import the language files you want to use in the code block and register them in the hightlight.js object. A list of available language files can be found here.
 // Step 1. Import highlight.js
 import hljs from 'highlight.js'; // The code-syntax-highlight plugin has highlight.js as a dependency
-import 'highlight.js/styles/github.css'; // HighLight.js' Dependency Style
+// import 'highlight.js/styles/github.css'; // HighLight.js' Dependency Style
 // Step 2. Import language files of highlight.js that you need
 // import javascript from 'highlight.js/lib/languages/javascript';
 // import clojure from 'highlight.js/lib/languages/clojure';
@@ -66,5 +66,13 @@ export default {
 </script>
 
 <style scoped>
-
+  /deep/ pre {
+    background: #2b2b2b;
+    color: #eeeeee;
+    border-radius: 6px;
+    margin-top: 15px;
+  }
+  /deep/ .tui-editor-contents h1, /deep/ .tui-editor-contents h2 {
+    border-bottom: none;
+  }
 </style>
