@@ -1,55 +1,38 @@
-<template>
-  <div class="home">
-    <el-date-picker type="date" v-model="date" placeholder="请选择日期"></el-date-picker>
-    <br/>
-    <a :href="downloadUrl" :download="downloadedFilename">备份文件下载</a>
+<template>  
+  <div class="ignore">
+    <header class="p-3 bg-dark bg-gradient text-white shadow position-fixed top-0 w-100">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <ul class="nav col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <router-link class="nav-link px-2 text-white" to="/blog/list">webLog</router-link>
+            <router-link class="nav-link px-2 text-white" to="/blog">checkList</router-link>
+            <router-link class="nav-link px-2 text-white" to="/blog">diary</router-link>
+          </ul>
+          <div class="text-end">
+            <button type="button" class="btn btn-outline-light me-2">Login</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <article>
+      <router-view/>
+    </article> 
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-// import Editor from '@toast-ui/editor';
-// import 'codemirror/lib/codemirror.css'; // Editor's Dependency Style
-// import '@toast-ui/editor/dist/toastui-editor.css'; // Editor's Style
-// import myUploader from '@/components/MyUploader.vue'
 
 export default {
-  name: 'Home',
-  components: {
-    
-  },
-  data(){
-    return {
-      date: new Date()
-    }
-  },
-  computed: {
-    dateString() {
-      return this.date.toISOString().split('T')[0].split('-').join('')
-    },
-    downloadedFilename() {
-      return `backup_${this.dateString}.sql`
-    },
-    /* eslint-disable */
-    downloadUrl() {
-      return `${evnConfig.sqlDownloadUrl}/${this.dateString}`
-    },
-    /* eslint-enable */
-  },
-  methods: {
-  },
+  name: 'App',  
 }
 </script>
 
-<style scoped>
-  .query-params-card {
-    margin-bottom: 5vh;
-  }
-  .data-picker-input {
-    width: 180px !important;
-  }
-  .article-list-card {
-    height: 70vh;
-  }
+<style lang="less" scoped>
+.ignore {
+  padding-top: 100px;
+}
+header {
+  font-size: 1.2em;
+  z-index: 10;
+}
 </style>

@@ -5,7 +5,7 @@
       <div ref="article" class='article-viewer-container tui-editor-contents'></div>  
     </div>
     <div class="col-3">
-      <div class="toc position-sticky start-0"></div>
+      <div class="toc position-sticky start-0 ignore"></div>
     </div>
   </div>
 </template>
@@ -92,19 +92,14 @@ export default {
 }
 </script>
 
-// <style scoped src="codemirror/lib/codemirror.css"></style>
-// <style scoped src="@toast-ui/editor/dist/toastui-editor.css"></style>
-// <style scoped src="codemirror/lib/codemirror.css"></style>
-// <style scoped src="highlight.js/styles/github.css"></style>
-// <style scoped src="tocbot/dist/styles.css"></style>
-// <style scoped src="tocbot/dist/tocbot.css"></style>
-
 <style scoped>
   .toc {
     height: auto;
-    top: 40px;
     font-size: 1.3em;
   } 
+  .ignore {
+    top: 90px;
+  }
   /deep/ pre {
     background: #2b2b2b;
     color: #eeeeee;

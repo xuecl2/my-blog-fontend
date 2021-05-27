@@ -1,10 +1,10 @@
 <template>
   <div class="article-card-container">
-    <div class="card article-card mb-1"  v-for="item in articleList" :key="item.id" @click="articleView(item.id)">
+    <div class="card article-card mb-1 ignore"  v-for="item in articleList" :key="item.id" @click="articleView(item.id)">
       <div class="card-body">
-        <div class="content-title">{{item.blogTitle}}</div>
+        <div class="content-title fs-5 fw-bolder">{{item.blogTitle}}</div>
         <div class="time">{{item.createDate}}</div>
-        <div class="digest">{{item.blogDigest}}</div>
+        <div class="digest fw-bold">{{item.blogDigest}}</div>
       </div>
     </div>
   </div>
@@ -31,5 +31,14 @@ export default {
 <style scoped>
   .article-card {
     cursor: pointer;
+  }
+  .ignore {
+    max-height: 133px;
+  }
+  .content-title {
+
+  }
+  .overflow {
+    text-overflow: ellipsis;
   }
 </style>

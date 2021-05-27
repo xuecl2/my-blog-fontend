@@ -1,7 +1,7 @@
 import {Toast as bsToast} from 'bootstrap/dist/js/bootstrap.esm'
 
 let toastCount = 0
-document.body.appendChild(new DOMParser().parseFromString(`<div class="toast-container position-absolute pt-5 top-0 translate-middle-x start-50"></div>`, 'text/html').querySelector('.toast-container'))
+document.body.appendChild(new DOMParser().parseFromString(`<div class="toast-container position-fixed pt-5 top-0 translate-middle-x start-50" style="z-index: 1000"></div>`, 'text/html').querySelector('.toast-container'))
 
 function toast(text, config) {
     const toastContainer = document.querySelector('.toast-container')

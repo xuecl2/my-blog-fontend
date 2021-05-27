@@ -23,46 +23,12 @@
           </form>
         </div>
         <div class="modal-footer border-0 bg-gray-100">
-          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal" @click="cancel()">Close</button>
-          <button class="btn btn-primary" type="button" @click="save()">Save changes</button>
+          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal" @click="cancel()">取消</button>
+          <button class="btn btn-dark" type="button" @click="save()">确定</button>
         </div>
       </div>
     </div>
   </div>
- <!-- <el-dialog :visible.sync="dialogVisible" :close-on-click-modal = "false" :close-on-press-escape = "false" @open = "init()">
-    <template #title>{{operation | operationFilter}}</template>
-    <div class="card">
-      <div class="card-body">
-        <el-form :model="blogObjectCopy" label-width="60px">
-          <el-row :gutter="60">
-            <el-col :span = "12">
-              <el-form-item label = "标题" prop="title" >
-                <el-input size = "small" v-model="blogObjectCopy.title"></el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span = "12">
-              <el-form-item label = "关键词" prop="keyWord">
-                <el-input size = "small" v-model="blogObjectCopy.keyWord"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row :gutter="20">
-            <el-col :span = "24">
-              <el-form-item label = "摘要" prop="digest">
-                <el-input size = "small" type = "textarea" :rows="4"  v-model="blogObjectCopy.digest"></el-input>
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-row type = "flex" justify="end">
-            <el-col :span ="6">
-              <button class="btn btn-primary" @click="save()">确定</button>
-              <button class="btn btn-primary" @click="cancel()">取消</button>
-            </el-col>
-          </el-row>
-        </el-form>
-      </div>
-    </div>
-  </el-dialog> -->
 </template>
 
 <script>
@@ -106,8 +72,10 @@ export default {
       blogObjectCopy: {}  // 传入的blog对象的副本，避免组件内部直接改变原对象
     }
   },
-  created() {
-    this.init()
+  watch: {
+    dialogVisible(value) {
+      if(value) this.init()
+    }
   },
   methods: {
     save(){
@@ -128,7 +96,7 @@ export default {
       requestData.user = 'xuecl'
       request(new saveBlog(requestData)).then((data) => {
         this.$toast.success('添加成功！')
-        this.$router.push({name: 'BlogEdit', params: {id: data.id}})
+        this.$router.push({name: 'BlogEdit', params: {blogid: data.id.toString()}})
       })
     },
     modify() {
@@ -144,6 +112,7 @@ export default {
       this.$emit('close-dialog')
     },
     init(){
+      console.log(this.blogObject)
       this.blogObjectCopy = JSON.parse(JSON.stringify(this.blogObject))
       if(utils.isBlank(this.blogObjectCopy.id)){
         this.operation = 'add'

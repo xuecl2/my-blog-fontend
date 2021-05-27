@@ -1,17 +1,16 @@
 <template>
   <div class='container'>
-    <div class="header">
-      <h1 class="title">{{blogObject.title}}</h1>
-      <div class="btn-group btn-row mb-1" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary" @click="dialogVisible=true">修改</button>
-        <button type="button" class="btn btn-primary" @click="edit()">编辑</button>
-        <button type="button" class="btn btn-primary" @click="remove()">删除</button>
+    <div class="row">
+      <div class="col me-end">
+        <div class="ms-3 fs-4 fw-bolder ">{{ blogObject.title }}</div>
       </div>
-      <!-- <div class="button-row" v-show="true">
-        <button class="btn btn-primary btn-sm" @click="dialogVisible=true"><i class="fa fa-edit"></i> 修改</button>
-        <button class="btn btn-primary btn-sm" @click="edit()"><i class="fa fa-edit"></i> 编辑</button>
-        <button class="btn btn-primary btn-sm" @click="remove()"><i class="fa fa-trash"></i> 删除</button>
-      </div> -->
+      <div class="col-auto">
+        <div class="btn-group btn-row mb-1" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-dark" @click="dialogVisible=true">修改</button>
+          <button type="button" class="btn btn-dark" @click="edit()">编辑</button>
+          <button type="button" class="btn btn-dark" @click="remove()">删除</button>
+        </div>
+      </div>
     </div>
     <div class="card">
       <div class="card-body">
@@ -25,7 +24,7 @@
 
 <script>
 // @ is an alias to /src
-import BlogModificationDialog from './component/BlogModificationDialog'
+import BlogModificationDialog from '@/components/BlogModificationDialog'
 import TuiViewer from '@/components/TuiViewer.vue'
 import request from '@/request/commonRequest.js'
 import utils from '@/utils/commonUtils'
@@ -58,6 +57,7 @@ export default {
   },
   methods:{
     refresh() {
+      this.$loading.show()
       request(new queryDetailBlogInfo({id: this.id})).then(({blogObject}) => {
         this.blogObject = {
           id: blogObject.id,
@@ -67,18 +67,24 @@ export default {
           digest: blogObject.blogDigest,
         }
         this.$refs.editor.setMarkdown(this.blogObject.content)
+        this.$loading.hide()
+      }).catch(err => {
+        console.error(err)
+        this.$loading.hide()
       })
     },
     closeDialog() {
       this.dialogVisible = false
     },
     edit() {
-      this.$router.push({name: 'BlogEdit', params: {blogid: this.blogid}})
+      this.$router.push({name: 'BlogEdit', params: {blogObject: this.blogObject}})
     },
     remove() {
-      request(new deleteBlog({id: this.id})).then(() => {
-        this.$toast.success('删除成功')
-        this.$router.push({name:'BlogList'})
+      this.$message('确定删除文章？', {buttonClose: true}).then(() => {
+        request(new deleteBlog({id: this.id})).then(() => {
+          this.$toast.success('删除成功')
+          this.$router.push({name:'BlogList'})
+        })
       })
     }
   },
@@ -87,25 +93,8 @@ export default {
 </script>
 
 <style scoped>
-  .container {
-    width: 1024px;
-    margin: 0 auto;
-  }
-  .el-button--mini{
-    padding-left: 7px;
-    padding-right: 7px;
-  }
-  .header {
-    position: relative;
-    width: 100%;
-  }
-  .header .title {
+  .header .article-title {
     text-align: center;
-  }
-  .header .button-row {
-    position: absolute;
-    right: 0;
-    bottom: 0;
   }
   .btn-row {
     display: block;

@@ -1,10 +1,14 @@
 <template>
   <div class="container">
-    <div class="header">
-      <h1 class="title">{{ blogObject.title }}</h1>
-      <div class="btn-group btn-row mb-1" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary" @click="save()">保存</button>
-        <button type="button" class="btn btn-primary" @click="back()">返回</button>
+    <div class="row">
+      <div class="col me-end">
+        <div class="ms-3 fs-4 fw-bolder ">{{ blogObject.title }}</div>
+      </div>
+      <div class="col-auto">
+        <div class="btn-group btn-row mb-1" role="group" aria-label="Basic example">
+          <button type="button" class="btn btn-dark" @click="save()">保存</button>
+          <button type="button" class="btn btn-dark" @click="back()">返回</button>
+        </div>
       </div>
     </div>
     <tui-editor
@@ -148,27 +152,4 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  width: 100%;
-}
-.el-button--mini {
-  padding-left: 7px;
-  padding-right: 7px;
-}
-.header {
-  position: relative;
-  width: 100%;
-}
-.header .title {
-  text-align: center;
-}
-.header .button-row {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-.btn-row {
-  display: block;
-  text-align: right;
-}
 </style>
