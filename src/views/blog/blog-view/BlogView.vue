@@ -5,7 +5,7 @@
         <div class="ms-3 fs-4 fw-bolder ">{{ blogObject.title }}</div>
       </div>
       <div class="col-auto">
-        <div class="btn-group btn-row mb-1" role="group" aria-label="Basic example">
+        <div v-if="user.logon"  class="btn-group btn-row mb-1" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-dark" @click="dialogVisible=true">修改</button>
           <button type="button" class="btn btn-dark" @click="edit()">编辑</button>
           <button type="button" class="btn btn-dark" @click="remove()">删除</button>
@@ -17,7 +17,7 @@
         <tui-viewer ref="editor"></tui-viewer>
       </div>
     </div>
-    <blog-modification-dialog :dialogVisible="dialogVisible" @close-dialog="closeDialog" 
+    <blog-modification-dialog :dialogVisible.sync="dialogVisible" 
       :blogObject="blogObject" @refresh="refresh"></blog-modification-dialog>
   </div>
 </template>
@@ -30,6 +30,7 @@ import request from '@/request/commonRequest.js'
 import utils from '@/utils/commonUtils'
 import {queryDetailBlogInfo} from '@/api/blog.js'
 import {deleteBlog} from '@/api/blog.js'
+import {user} from '@/global/globalVariable.js'
 
 export default {
   name: 'EditBlog',
@@ -40,7 +41,8 @@ export default {
     return {
       blogObject: {},
       dialogVisible: false,
-      id: parseInt(this.blogid)
+      id: parseInt(this.blogid),
+      user,
     }
   },
   props:{

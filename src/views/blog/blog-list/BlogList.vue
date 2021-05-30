@@ -11,7 +11,7 @@
         </div> 
       </div>
     </div>
-    <a class="quick-add-btn ignore" href="#" @click="dialogVisible = true">
+    <a v-if="user.logon" class="quick-add-btn ignore" href="#" @click="dialogVisible = true">
       <i class="bi bi-plus fs-1"></i>
     </a>
     <blog-modification-dialog :dialogVisible.sync="dialogVisible" @refresh="queryBlogList"></blog-modification-dialog>
@@ -23,6 +23,7 @@ import {queryBlogListRequest} from '@/api/blog.js'
 import request from '@/request/commonRequest'
 import ArticleCard from './component/ArticleCard.vue'
 import BlogModificationDialog from '@/components/BlogModificationDialog'
+import {user} from '@/global/globalVariable.js'
 
 export default {
   components: { ArticleCard, BlogModificationDialog },
@@ -33,6 +34,7 @@ export default {
       blogList: [],
       queryCondition: '',
       dialogVisible: false,
+      user,
     }
   },
   created() {

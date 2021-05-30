@@ -35,9 +35,6 @@ export default {
   .ignore {
     max-height: 133px;
   }
-  .content-title {
-
-  }
   .overflow {
     text-overflow: ellipsis;
   }

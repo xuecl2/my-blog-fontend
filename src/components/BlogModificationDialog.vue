@@ -109,7 +109,7 @@ export default {
       })
     },
     cancel() {
-      this.$emit('close-dialog')
+      this.dialogVisible = false
     },
     init(){
       console.log(this.blogObject)
