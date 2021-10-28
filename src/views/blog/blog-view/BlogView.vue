@@ -102,4 +102,8 @@ export default {
     display: block;
     text-align: right;
   }
+  /deep/ .tui-editor-contents ol > li::before {
+    margin-left: -2.2em;
+    width: 2em;
+  }
 </style>
