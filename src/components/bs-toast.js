@@ -16,7 +16,7 @@ function toast(text, config) {
             <span class="me-auto">
             <i class="bi bi-check-circle-fill text-success fs-6 me-2 ${type === 'success' ? 'd-inline' : 'd-none'}"></i>
             <i class="bi bi-exclamation-triangle-fill text-success fs-6 me-2 ${type === 'warn' ? 'd-inline' : 'd-none'}"></i>
-            <i class="bi bi-x-circle-fill text-warning fs-6 me-2 ${type === 'error' ? 'd-inline' : 'd-none'}"></i>
+            <i class="bi bi-x-circle-fill text-warning fs-6 me-2 ${type === 'alert' ? 'd-inline' : 'd-none'}"></i>
             ${text}</span>
             <button type="button" class="btn-close me-1 fs-6 ${closeable ? 'visible' : 'invisible'}" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>

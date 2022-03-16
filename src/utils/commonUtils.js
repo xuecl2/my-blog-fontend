@@ -40,7 +40,7 @@ const utils = {
       // Something happened in setting up the request that triggered an Error
       console.log('Error', error.message);
     }
-    toast.toast(error.message)
+    toast.error(error.message)
     let err = new Error('request failed')
     err.errType = errCode.reqFailed
     throw err

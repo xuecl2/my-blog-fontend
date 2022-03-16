@@ -109,7 +109,8 @@ export default {
       })
     },
     cancel() {
-      this.dialogVisible = false
+      // this.dialogVisible = false
+      this.$emit('update:dialogVisible', false)
     },
     init(){
       console.log(this.blogObject)
