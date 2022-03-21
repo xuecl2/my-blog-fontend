@@ -7,8 +7,8 @@
     <div class="card col-3 index">
       <div class="card-body">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="输入关键词查询">
-          <button class="btn btn-dark text-light" type="button">查询</button>
+          <input type="text" class="form-control" v-model="queryCondition" placeholder="输入关键词查询">
+          <button class="btn btn-dark text-light" type="button" @click="queryBlogList(1)">查询</button>
         </div> 
       </div>
     </div>
@@ -58,6 +58,7 @@ export default {
       this.queryParams.keyWord = this.queryCondition
       this.queryParams.rowsPerPage = this.pageSize
       this.queryParams.pageNo = pageNo - 1
+      this.queryParams.queryCondition = this.queryCondition
       request(new queryBlogListRequest(this.queryParams)).then(data => {
         this.blogList = data.resultList
         if(this.blogList.length == 0){
