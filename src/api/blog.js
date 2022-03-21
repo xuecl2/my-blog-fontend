@@ -11,7 +11,10 @@ export class queryBlogListRequest {
         title: params.title,
         keyWord: params.keyWord,
         startModifyDate: params.startModifyDate,
-        endModifyDate: params.endModifyDate
+        endModifyDate: params.endModifyDate,
+        queryCondition: params.queryCondition,
+        pageNo: params.pageNo,
+        rowsPerPage: params.rowsPerPage,
       }
     }
   }

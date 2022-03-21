@@ -30,16 +30,21 @@ export default {
   name: 'App',  
   data(){
     return {
-      queryParams: {},
+      queryParams: {
+        pageNo: 1,
+        rowsPerPage: 10,
+      },
       blogList: [],
       queryCondition: '',
       dialogVisible: false,
       user,
     }
   },
+
   created() {
     this.queryBlogList()
   },
+
   methods: {
     queryBlogList() {
       this.$loading.show()
