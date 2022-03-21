@@ -1,7 +1,7 @@
 .DS_Store
 node_modules
 /dist
-/public/config/evnConfig.js
+/public/config/envConfig.js
 
 # local env files
 .env.local

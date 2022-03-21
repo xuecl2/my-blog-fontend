@@ -1,7 +1,8 @@
 <template>  
   <div class="container">
     <div class="col-9 me-4 article">
-      <article-card :articleList="blogList" @article-view="toBlogView"></article-card>
+      <article-card class="mb-5" :articleList="blogList" @article-view="toBlogView"></article-card>
+      <pagination :total-pages="totalPages" :current-page="currentPage" @click="queryBlogList"></pagination>
     </div>
     <div class="card col-3 index">
       <div class="card-body">
@@ -23,43 +24,54 @@ import {queryBlogListRequest} from '@/api/blog.js'
 import request from '@/request/commonRequest'
 import ArticleCard from './component/ArticleCard.vue'
 import BlogModificationDialog from '@/components/BlogModificationDialog'
+import Pagination from '@/components/Pagination'
 import {user} from '@/global/globalVariable.js'
 
 export default {
-  components: { ArticleCard, BlogModificationDialog },
-  name: 'App',  
+  name: 'BlogList',  
+
+  components: { ArticleCard, BlogModificationDialog, Pagination },
+  
   data(){
     return {
-      queryParams: {
-        pageNo: 1,
-        rowsPerPage: 10,
-      },
+      queryParams: {},
       blogList: [],
       queryCondition: '',
       dialogVisible: false,
       user,
+      pageSize: 5,
+      currentPage: 1,
+      totalPages: 0,
     }
   },
 
+  computed: {
+  },
+
   created() {
-    this.queryBlogList()
+    this.queryBlogList(this.currentPage)
   },
 
   methods: {
-    queryBlogList() {
+    queryBlogList(pageNo) {
       this.$loading.show()
       this.queryParams.keyWord = this.queryCondition
+      this.queryParams.rowsPerPage = this.pageSize
+      this.queryParams.pageNo = pageNo - 1
       request(new queryBlogListRequest(this.queryParams)).then(data => {
         this.blogList = data.resultList
         if(this.blogList.length == 0){
           this.$toast.warning('无满足条件的记录')
         }
         this.$loading.hide()
+        this.currentPage = pageNo
+        this.totalPages = Math.floor(data.totalRows / this.pageSize)
       }).catch(err => {
         console.error(err)
         this.$nextTick().then(this.$loading.hide())
       })
     },
+
     toBlogView(id) {
       this.$router.push({name: 'BlogView', params: {blogid: id.toString()}})
     }

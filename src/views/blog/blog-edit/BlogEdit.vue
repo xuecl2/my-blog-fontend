@@ -94,7 +94,7 @@ export default {
             let arrayTmp = element.split("=");
             let filename = decodeURIComponent(arrayTmp[arrayTmp.length - 1]);
             let pic = new Pic();
-            pic.downloadUrl = evnConfig.baseUrl + element;
+            pic.downloadUrl = envConfig.baseUrl + element;
             pic.uploadName = filename;
             pic.id = pic.id + filename;
             this.fileList.push(pic);
@@ -125,7 +125,7 @@ export default {
       request(new uploadFile({...fileObject,id: this.id})).then(data => {
         /* eslint-disable */
         // 加上图片的文本后，编辑器在加载图片的一瞬间游标的位置会变的很奇怪(后面随便手动输入点东西就能恢复)。下面代码的最后加上空格是为了解决这个问题，具体原因尚不清楚
-        this.$refs.editor.setMarkdown(this.$refs.editor.getMarkdown() + utils.getImgMarkdownString(evnConfig.baseUrl + data.url, file.name) + ' ')
+        this.$refs.editor.setMarkdown(this.$refs.editor.getMarkdown() + utils.getImgMarkdownString(envConfig.baseUrl + data.url, file.name) + ' ')
         /* eslint-enable */
         this.$loading.hide()
       }).catch( () => {

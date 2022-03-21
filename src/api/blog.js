@@ -78,7 +78,7 @@ export class uploadFile {
     this.config = {
       requsetPath: '',
       requestMethod: 'post',
-      baseURL: evnConfig.fileUploadUrl,
+      baseURL: envConfig.fileUploadUrl,
       url: params.id.toString(),
     }
     this.data = new FormData()
@@ -92,7 +92,7 @@ export class deleteFile {
     this.config = {
       requsetPath: '',
       requestMethod: 'post',
-      baseURL: evnConfig.fileDeleteUrl,
+      baseURL: envConfig.fileDeleteUrl,
     }
     this.data = {
       filename: params.filename,

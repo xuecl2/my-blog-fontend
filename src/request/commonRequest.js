@@ -4,7 +4,7 @@ import errorCodeUtils from '@/utils/errorCodeUtils'
 
 /* eslint-disable */
 const defaultAxiosConfig = {
-    baseURL: evnConfig.baseUrl,
+    baseURL: envConfig.baseUrl,
     timeout: 30000,
     method: 'post',
     // headers: {'Content-Type': 'application/x-www-form-urlencoded'},

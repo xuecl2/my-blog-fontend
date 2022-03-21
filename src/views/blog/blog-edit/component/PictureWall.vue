@@ -48,7 +48,7 @@ export default {
       request(new uploadFile({...fileObject,id: this.id})).then(data => {
         this.$message.success('上传成功')
         this.fileList[index].uploadName = fileObject.name
-        this.fileList[index].downloadUrl = evnConfig.baseUrl + data.url
+        this.fileList[index].downloadUrl = envConfig.baseUrl + data.url
       })
     },
     deleteFile(fileObject){
