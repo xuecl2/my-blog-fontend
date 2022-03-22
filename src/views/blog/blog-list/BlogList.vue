@@ -55,7 +55,6 @@ export default {
   methods: {
     queryBlogList(pageNo) {
       this.$loading.show()
-      this.queryParams.keyWord = this.queryCondition
       this.queryParams.rowsPerPage = this.pageSize
       this.queryParams.pageNo = pageNo - 1
       this.queryParams.queryCondition = this.queryCondition
