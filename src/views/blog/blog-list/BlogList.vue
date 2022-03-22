@@ -4,10 +4,10 @@
       <article-card class="mb-5" :articleList="blogList" @article-view="toBlogView"></article-card>
       <pagination :total-pages="totalPages" :current-page="currentPage" @click="queryBlogList"></pagination>
     </div>
-    <div class="card col-3 index">
+    <div class="col-3 index">
       <div class="card-body">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" v-model="queryCondition" placeholder="输入关键词查询">
+          <input type="text" class="form-control" v-model="queryCondition" placeholder="输入关键词查询" @focus="focusHandler" @blur="blurHandler">
           <button class="btn btn-dark text-light" type="button" @click="queryBlogList(1)">查询</button>
         </div> 
       </div>
@@ -32,7 +32,7 @@ export default {
 
   components: { ArticleCard, BlogModificationDialog, Pagination },
   
-  data(){
+  data() {
     return {
       queryParams: {},
       blogList: [],
@@ -42,6 +42,9 @@ export default {
       pageSize: 5,
       currentPage: 1,
       totalPages: 0,
+      pressEnterHandler: event => {
+        if(event.keyCode === 13) this.queryBlogList(1)
+      }
     }
   },
 
@@ -50,6 +53,10 @@ export default {
 
   created() {
     this.queryBlogList(this.currentPage)
+  },
+
+  beforeDestroy() {
+    document.removeEventListener('keyup', this.pressEnterHandler)
   },
 
   methods: {
@@ -74,6 +81,14 @@ export default {
 
     toBlogView(id) {
       this.$router.push({name: 'BlogView', params: {blogid: id.toString()}})
+    },
+
+    focusHandler() {
+      document.addEventListener('keyup', this.pressEnterHandler)
+    }, 
+
+    blurHandler() {
+      document.removeEventListener('keyup', this.pressEnterHandler)
     }
   }
 }
