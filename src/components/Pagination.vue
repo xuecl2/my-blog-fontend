@@ -6,7 +6,7 @@
           <span aria-hidden="true">&laquo;</span>
         </span>
       </li>
-      <li class="page-item" :class="{active: index == currentPage}" v-for="index in pages" :key="index" @click="jump(index)"><span class="page-link">{{index}}</span></li>
+      <li class="page-item" :class="{active: index == currentPage, ellipsis: index === 0}" v-for="index in pages" :key="index" @click="jump(index)"><span class="page-link">{{index||'...'}}</span></li>
       <li class="page-item" @click="next()">
         <span class="page-link" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
@@ -34,14 +34,43 @@ export default {
 
   data() {
     return {
+      halfPagesLength: 5, 
     }
   },
 
   computed: {
     pages() {
       const list = []
-      for(let i = 1; i <= this.totalPages; i++) {
-        list.push(i)
+      if(this.halfPagesLength * 2 - 1 >= this.totalPages) {
+        for(let i = 1; i <= this.totalPages; i++) {
+          list.push(i)
+        }
+      }else {
+        let middleValue = this.currentPage
+        if(this.currentPage < this.halfPagesLength) middleValue = this.halfPagesLength
+        if(this.currentPage + this.halfPagesLength - 1 > this.totalPages) middleValue = this.totalPages - this.halfPagesLength + 1
+        if(middleValue > this.halfPagesLength) {
+          list.push(1)
+          list.push(0)
+          for(let i = middleValue - this.halfPagesLength + 3; i <= middleValue; i++) {
+            list.push(i)
+          }
+        }else {
+          for(let i = 1; i <= middleValue; i++) {
+            list.push(i)
+          }
+        }
+        if(middleValue < this.totalPages - this.halfPagesLength + 1) {
+          for(let i = middleValue + 1; i <= middleValue + this.halfPagesLength - 3; i++) {
+            list.push(i)
+          }
+          list.push(0)
+          list.push(this.totalPages)
+        }else {
+          for(let i = middleValue + 1; i<= this.totalPages; i++) {
+            list.push(i)
+          }
+        }
       }
       return list
     }
@@ -54,6 +83,7 @@ export default {
     },
 
     jump(pageNo) {
+      if(pageNo === 0) return
       this.$emit("click", pageNo)
     },
 
@@ -68,5 +98,8 @@ export default {
 <style>
   .page-link {
     cursor: pointer;
+  }
+  .ellipsis {
+    cursor: none;
   }
 </style>

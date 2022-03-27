@@ -72,7 +72,7 @@ export default {
         }
         this.$loading.hide()
         this.currentPage = pageNo
-        this.totalPages = Math.floor(data.totalRows / this.pageSize)
+        this.totalPages = Math.ceil(data.totalRows / this.pageSize)
       }).catch(err => {
         console.error(err)
         this.$nextTick().then(this.$loading.hide())
