@@ -33,7 +33,7 @@ import {deleteBlog} from '@/api/blog.js'
 import {user} from '@/global/globalVariable.js'
 
 export default {
-  name: 'EditBlog',
+  name: 'BlogView',
   components: {
     TuiViewer,BlogModificationDialog
   },
