@@ -30,7 +30,6 @@ import request from '@/request/commonRequest.js'
 import utils from '@/utils/commonUtils'
 import {queryDetailBlogInfo} from '@/api/blog.js'
 import {deleteBlog} from '@/api/blog.js'
-import {user} from '@/global/globalVariable.js'
 
 export default {
   name: 'BlogView',
@@ -42,7 +41,7 @@ export default {
       blogObject: {},
       dialogVisible: false,
       id: parseInt(this.blogid),
-      user,
+      user: sessionStorage.getItem('user')?JSON.parse(sessionStorage.getItem('user')):{},
     }
   },
   props:{

@@ -1,18 +1,24 @@
 <template>  
-  <div class="container">
-    <div class="col-9 me-4 article">
-      <article-card class="mb-5" :articleList="blogList" @article-view="toBlogView"></article-card>
-      <pagination :total-pages="totalPages" :current-page="currentPage" @click="queryBlogList"></pagination>
-    </div>
-    <div class="col-3 index">
-      <div class="card-body">
-        <form class="input-group mb-3" @submit.prevent="queryBlogList(1)">
+  <div class="container position-relative">
+    <div class="row w-100">
+      <div class="col-12 col-lg-9 article">
+        <form class="d-lg-none input-group mb-3 position-sticky start-0" @submit.prevent="queryBlogList(1)">
           <input type="text" class="form-control" v-model="queryCondition" placeholder="输入关键词查询">
           <button class="btn btn-dark text-light" type="button">查询</button>
         </form> 
+        <article-card class="mb-5" :articleList="blogList" @article-view="toBlogView"></article-card>
+        <pagination :total-pages="totalPages" :current-page="currentPage" @click="queryBlogList"></pagination>
+      </div>
+      <div class="col-3 index d-none d-lg-block">
+        <div class="card-body">
+          <form class="input-group mb-3 ps-3" @submit.prevent="queryBlogList(1)">
+            <input type="text" class="form-control" v-model="queryCondition" placeholder="输入关键词查询">
+            <button class="btn btn-dark text-light" type="button">查询</button>
+          </form> 
+        </div>
       </div>
     </div>
-    <a v-if="user.logon" class="quick-add-btn ignore" href="#" @click="dialogVisible = true">
+    <a v-if="user.name" class="quick-add-btn ignore" href="#" @click="dialogVisible = true">
       <i class="bi bi-plus fs-1"></i>
     </a>
     <blog-modification-dialog :dialogVisible.sync="dialogVisible" @refresh="queryBlogList"></blog-modification-dialog>
@@ -25,7 +31,6 @@ import request from '@/request/commonRequest'
 import ArticleCard from './component/ArticleCard.vue'
 import BlogModificationDialog from '@/components/BlogModificationDialog'
 import Pagination from '@/components/Pagination'
-import {user} from '@/global/globalVariable.js'
 
 export default {
   name: 'BlogList',  
@@ -38,7 +43,7 @@ export default {
       blogList: [],
       queryCondition: '',
       dialogVisible: false,
-      user,
+      user: sessionStorage.getItem('user')?JSON.parse(sessionStorage.getItem('user')):{},
       pageSize: 5,
       currentPage: 1,
       totalPages: 0,
