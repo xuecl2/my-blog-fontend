@@ -1,5 +1,5 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <p class="text-center">本网站用于记录一些知识，同时用来练习web开发技术</p>
   </div>
 </template>

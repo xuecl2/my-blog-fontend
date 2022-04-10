@@ -7,29 +7,38 @@ Vue.use(VueRouter)
 const routes = [
   { 
     path: '/', 
-    name: 'Home',
     redirect: '/blog',
   },
+
+  { 
+    path: '/login/:name', 
+    props: true,
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "blog" */ '../views/Login.vue'),
+  },
+
   {
     path: '/blog',
-    name: 'Blog',
     component: () => import(/* webpackChunkName: "blog" */ '../views/blog/Blog.vue'),
     children: [
       {
         path: '',
         redirect: 'list'
       },
+
       {
         path: 'list',
         name: 'BlogList',
         component: () => import(/* webpackChunkName: "blog-list" */ '../views/blog/blog-list/BlogList.vue')
       },
+
       {
         path: 'view/:blogid',
         name: 'BlogView',
         props: true,
         component: () => import(/* webpackChunkName: "blog-view" */ '../views/blog/blog-view/BlogView.vue')
       },
+
       {
         path: 'edit/:blogid',
         name: 'BlogEdit',
@@ -38,13 +47,15 @@ const routes = [
       },
     ]
   },
+
   { 
     path: '/about', 
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
+
   { 
     path: '*', 
-    name: pageNotFound,
+    name: 'pageNotFound',
     component: pageNotFound
   },
 ]
