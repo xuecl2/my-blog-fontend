@@ -1,10 +1,10 @@
 <template>
   <div class="row">
     <div ref="viewer" v-show="false"></div>  
-    <div class="col-9">
+    <div class="col-12 col-md-9">
       <div ref="article" class='article-viewer-container tui-editor-contents'></div>  
     </div>
-    <div class="col-3">
+    <div class="col-0 col-md-3">
       <div class="toc position-sticky start-0 ignore"></div>
     </div>
   </div>

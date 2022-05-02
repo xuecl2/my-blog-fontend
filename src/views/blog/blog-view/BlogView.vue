@@ -5,7 +5,7 @@
         <div class="ms-3 fs-4 fw-bolder ">{{ blogObject.title }}</div>
       </div>
       <div class="col-auto">
-        <div v-if="user.logon"  class="btn-group btn-row mb-1" role="group" aria-label="Basic example">
+        <div v-if="user.name" class="btn-group btn-row mb-1" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-dark" @click="dialogVisible=true">修改</button>
           <button type="button" class="btn btn-dark" @click="edit()">编辑</button>
           <button type="button" class="btn btn-dark" @click="remove()">删除</button>
