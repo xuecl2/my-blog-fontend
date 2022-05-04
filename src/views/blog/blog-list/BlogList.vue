@@ -1,17 +1,17 @@
 <template>  
-  <div class="container position-relative">
-    <div class="row w-100">
-      <div class="col-12 col-lg-9 article">
-        <form class="d-lg-none input-group mb-3 position-sticky start-0" @submit.prevent="queryBlogList(1)">
+  <div class="container position-relative p-0 ignore">
+    <div class="row w-100 gx-0 gx-md-5">
+      <div class="col-12 col-lg-7 article">
+        <form class="d-lg-none input-group mb-3 position-sticky start-0 px-2" @submit.prevent="queryBlogList(1)">
           <input type="text" class="form-control" v-model="queryCondition" placeholder="输入关键词查询">
           <button class="btn btn-dark text-light" type="button">查询</button>
         </form> 
-        <article-card class="mb-5" :articleList="blogList" @article-view="toBlogView"></article-card>
+        <article-card class="mb-3" :articleList="blogList" @article-view="toBlogView"></article-card>
         <pagination :total-pages="totalPages" :current-page="currentPage" @click="queryBlogList"></pagination>
       </div>
-      <div class="col-3 index d-none d-lg-block">
+      <div class="col-5 index d-none d-lg-block">
         <div class="card-body">
-          <form class="input-group mb-3 ps-3" @submit.prevent="queryBlogList(1)">
+          <form class="input-group mb-3 ps-5" @submit.prevent="queryBlogList(1)">
             <input type="text" class="form-control" v-model="queryCondition" placeholder="输入关键词查询">
             <button class="btn btn-dark text-light" type="button">查询</button>
           </form> 
@@ -88,10 +88,16 @@ export default {
   .container {
     display: flex;
   }
+
+  .container.ignore {
+    max-width: 1024px;
+  }
+
   .quick-add-btn:hover {
     color: var(--bg-primary);
     background: var(--nav-color);
   }
+
   .quick-add-btn {
     position: fixed;
     display: block;
@@ -106,11 +112,13 @@ export default {
     transition: all .15s ease-in;
     text-decoration: none;
   } 
-  .ignore {
+
+  .quick-add-btn.ignore {
     height: 52px;
     width: 52px;
     line-height: 52px;
   }
+
   .bi.bi-plus::before {
     line-height: inherit;
   }

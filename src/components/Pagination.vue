@@ -1,13 +1,13 @@
 <template>
   <nav aria-label="Page navigation example" v-show="totalPages > 0">
     <ul class="pagination justify-content-center">
-      <li class="page-item" @click="preview()">
+      <li class="page-item mx-mb-1" @click="preview()">
         <span class="page-link" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
         </span>
       </li>
-      <li class="page-item" :class="{active: index == currentPage, ellipsis: index === 0}" v-for="index in pages" :key="index" @click="jump(index)"><span class="page-link">{{index||'...'}}</span></li>
-      <li class="page-item" @click="next()">
+      <li class="page-item mx-mb-1" :class="{active: index == currentPage, ellipsis: index === 0}" v-for="index in pages" :key="index" @click="jump(index)"><span class="page-link">{{index||'...'}}</span></li>
+      <li class="page-item mx-mb-1" @click="next()">
         <span class="page-link" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
         </span>
@@ -30,11 +30,15 @@ export default {
       type: Number,
       default: 1
     },
+
+    halfPagesLength: {
+      type: Number,
+      default: 5,
+    }
   },
 
   data() {
     return {
-      halfPagesLength: 5, 
     }
   },
 
