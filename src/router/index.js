@@ -48,6 +48,29 @@ const routes = [
     ]
   },
 
+  {
+    path: '/category',
+    component: () => import(/* webpackChunkName: "category" */ '../views/category/Category.vue'),
+    children: [
+      {
+        path: '',
+        redirect: 'list'
+      },
+
+      {
+        path: 'list',
+        name: 'CategoryList',
+        component: () => import(/* webpackChunkName: "category-list" */ '../views/category/category-list/CategoryList.vue')
+      },
+
+      {
+        path: 'edit',
+        name: 'CategoryEdit',
+        component: () => import(/* webpackChunkName: "category-edit" */ '../views/category/category-edit/CategoryEdit.vue')
+      },
+    ]
+  },
+
   { 
     path: '/about', 
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')

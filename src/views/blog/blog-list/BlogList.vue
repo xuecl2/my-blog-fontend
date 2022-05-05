@@ -1,6 +1,6 @@
 <template>  
   <div class="container position-relative p-0 ignore">
-    <div class="row w-100 gx-0 gx-md-5">
+    <div class="row w-100 gx-0 gx-md-5 me-5">
       <div class="col-12 col-lg-7 article">
         <form class="d-lg-none input-group mb-3 position-sticky start-0 px-2" @submit.prevent="queryBlogList(1)">
           <input type="text" class="form-control" v-model="queryCondition" placeholder="输入关键词查询">
@@ -11,10 +11,12 @@
       </div>
       <div class="col-5 index d-none d-lg-block">
         <div class="card-body">
-          <form class="input-group mb-3 ps-5" @submit.prevent="queryBlogList(1)">
+          <form class="input-group mb-3" @submit.prevent="queryBlogList(1)">
             <input type="text" class="form-control" v-model="queryCondition" placeholder="输入关键词查询">
             <button class="btn btn-dark text-light" type="button">查询</button>
           </form> 
+          <span>分类</span>
+          <dir-tree :dir-list="dirList"></dir-tree>
         </div>
       </div>
     </div>
@@ -31,11 +33,12 @@ import request from '@/request/commonRequest'
 import ArticleCard from './component/ArticleCard.vue'
 import BlogModificationDialog from '@/components/BlogModificationDialog'
 import Pagination from '@/components/Pagination'
+import DirTree from '@/components/DirTree'
 
 export default {
   name: 'BlogList',  
 
-  components: { ArticleCard, BlogModificationDialog, Pagination },
+  components: { ArticleCard, BlogModificationDialog, Pagination, DirTree },
   
   data() {
     return {
@@ -47,10 +50,27 @@ export default {
       pageSize: 5,
       currentPage: 1,
       totalPages: 0,
+      dirList: [
+        {
+          name: 'defalut', 
+          subList: [],
+        },
+        {
+          name: 'list',
+          subList: [
+            {
+              name: 'list1',
+              subList: [
+                {
+                  name: 'list2',
+                  subList: [],
+                }
+              ]
+            }
+          ] 
+        }
+      ]
     }
-  },
-
-  computed: {
   },
 
   created() {

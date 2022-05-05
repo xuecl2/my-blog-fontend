@@ -31,9 +31,12 @@
           <i class="close-button bi bi-x me-2 fs-1" @click="sideNav = false"></i>
         </div>
         <ul class="nav fs-5" @click="sideNav = false">
-          <router-link class="nav-link px-4 text-white mb-3 w-100" to="/blog">Home</router-link>
+          <router-link class="nav-link px-4 text-white mb-3 w-100" to="/blog">Article</router-link>
+          <router-link class="nav-link px-4 text-white mb-3 w-100" to="/blog">Category</router-link>
+          <router-link class="nav-link px-4 text-white mb-3 w-100" to="/blog">Demo</router-link>
+          <router-link class="nav-link px-4 text-white mb-3 w-100" to="/blog"></router-link>
           <router-link class="nav-link px-4 text-white mb-3 w-100" to="/about">About</router-link>
-          <router-link v-if="user.name" class="nav-link px-4 text-white mb-3 w-100" to="/blog">Diary</router-link>
+          <router-link v-if="user.name" class="nav-link px-4 text-white mb-3 w-100" to="/blog">k</router-link>
         </ul>
       </div>
     </div> 

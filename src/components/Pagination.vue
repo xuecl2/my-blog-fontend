@@ -103,6 +103,7 @@ export default {
   .page-link {
     cursor: pointer;
   }
+
   .ellipsis {
     cursor: none;
   }
