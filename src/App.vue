@@ -14,11 +14,12 @@
           </div>
           <ul class="nav col-6 justify-content-center fs-6 m-auto d-none d-lg-flex">
             <router-link class="nav-link px-3 text-white" to="/blog">Home</router-link>
+            <router-link v-if="user" class="nav-link px-3 text-white" to="/category">Category</router-link>
+            <router-link v-if="user" class="nav-link px-3 text-white" to="/css-demo">Demo</router-link>
             <router-link class="nav-link px-3 text-white" to="/about">About</router-link>
-            <router-link v-if="user" class="nav-link px-3 text-white" to="/blog">Category</router-link>
           </ul>
           <div class="col-3 d-none d-lg-block text-end">
-            <a v-if="user.name" href="#" class="nav-link px-2 text-white">{{user.name}}</a>
+            <a v-if="user.name" href="#" class="text-decoration-none px-2 text-white">{{user.name}}</a>
           </div>
         </div>
       </div>
@@ -32,9 +33,8 @@
         </div>
         <ul class="nav fs-5" @click="sideNav = false">
           <router-link class="nav-link px-4 text-white mb-3 w-100" to="/blog">Article</router-link>
-          <router-link class="nav-link px-4 text-white mb-3 w-100" to="/blog">Category</router-link>
-          <router-link class="nav-link px-4 text-white mb-3 w-100" to="/blog">Demo</router-link>
-          <router-link class="nav-link px-4 text-white mb-3 w-100" to="/blog"></router-link>
+          <router-link class="nav-link px-4 text-white mb-3 w-100" to="/category">Category</router-link>
+          <router-link class="nav-link px-4 text-white mb-3 w-100" to="/css-demo">Demo</router-link>
           <router-link class="nav-link px-4 text-white mb-3 w-100" to="/about">About</router-link>
           <router-link v-if="user.name" class="nav-link px-4 text-white mb-3 w-100" to="/blog">k</router-link>
         </ul>
@@ -92,5 +92,25 @@ header {
 
 .logo img {
   width: calc(2rem + 0.5vw);
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::before {content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  width: 0;
+  height: 2px;
+  background-color: #fff;
+  border-radius: 1.5px;
+  transform: translateX(-50%);
+  transition: all 0.5s ease;
+}
+
+.nav-link:hover::before {
+  width: calc(100% - 2rem);
 }
 </style>

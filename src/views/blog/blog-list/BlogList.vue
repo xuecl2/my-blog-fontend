@@ -11,11 +11,11 @@
       </div>
       <div class="col-5 index d-none d-lg-block">
         <div class="card-body">
-          <form class="input-group mb-3" @submit.prevent="queryBlogList(1)">
+          <form class="input-group mb-5" @submit.prevent="queryBlogList(1)">
             <input type="text" class="form-control" v-model="queryCondition" placeholder="输入关键词查询">
             <button class="btn btn-dark text-light" type="button">查询</button>
           </form> 
-          <span>分类</span>
+          <div class="border-bottom border-1 border-dark fs-5 mb-4 w-75">文章分类</div>
           <dir-tree :dir-list="dirList"></dir-tree>
         </div>
       </div>

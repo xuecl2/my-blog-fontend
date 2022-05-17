@@ -19,6 +19,7 @@
 </template>
 
 <script>
+// import loginUser from '@/global/user'
 export default {
   name: 'Login',
 

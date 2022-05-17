@@ -9,6 +9,6 @@ class Pic { // 图片的类
     this.id = new Date().getTime().toString()
   }
 }
-export {errCode, Pic}
+export { errCode, Pic }
 
 
