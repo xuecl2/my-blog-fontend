@@ -1,7 +1,9 @@
 <template>  
   <div class="container">
-    <dir-tree :dir-list="dirList" #default="{ dir }">
-      <i v-show="user.name" class="bi bi-three-dots arrow" @click.stop="showMenu(dir)"></i>
+    <dir-tree :dir-list="dirList">
+      <template #default = "{ dir }">
+        <i v-show="user.name" class="bi bi-three-dots arrow" @click.stop="showMenu(dir)"></i>
+      </template>
     </dir-tree>
   </div>
 </template>

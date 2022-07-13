@@ -31,7 +31,7 @@
 import {queryBlogListRequest} from '@/api/blog.js'
 import request from '@/request/commonRequest'
 import ArticleCard from './component/ArticleCard.vue'
-import BlogModificationDialog from '@/components/BlogModificationDialog'
+import BlogModificationDialog from '@/views/blog/components/BlogModificationDialog'
 import Pagination from '@/components/Pagination'
 import DirTree from '@/components/DirTree'
 
@@ -107,10 +107,6 @@ export default {
 <style scoped>
   .container {
     display: flex;
-  }
-
-  .container.ignore {
-    max-width: 1024px;
   }
 
   .quick-add-btn:hover {

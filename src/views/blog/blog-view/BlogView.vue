@@ -24,7 +24,7 @@
 
 <script>
 // @ is an alias to /src
-import BlogModificationDialog from '@/components/BlogModificationDialog'
+import BlogModificationDialog from '@/views/blog/components/BlogModificationDialog'
 import TuiViewer from '@/components/TuiViewer.vue'
 import request from '@/request/commonRequest.js'
 import utils from '@/utils/commonUtils'
