@@ -4,7 +4,7 @@
       <div class="col-12 col-lg-8 me-auto pe-lg-5 article">
         <form class="d-lg-none input-group mb-3 position-sticky start-0 px-2" @submit.prevent="queryBlogList(1)">
           <input type="text" class="form-control" v-model="queryCondition" placeholder="输入关键词查询">
-          <button class="btn btn-dark text-light" type="button">查询</button>
+          <button class="btn btn-dark text-light" type="submit">查询</button>
         </form> 
         <article-card class="mb-3" :articleList="blogList" @article-view="toBlogView"></article-card>
         <pagination :total-pages="totalPages" :current-page="currentPage" @click="queryBlogList"></pagination>
@@ -74,11 +74,28 @@ export default {
   },
 
   created() {
-    this.queryBlogList(this.currentPage)
+    const { queryParams } = this.$route.query
+    this.queryCondition = queryParams
+    this.queryBlogList()
+    this.queryCondition = ''
+  },
+
+  beforeRouteUpdate(to, from ,next) {
+    if(this.queryCondition === to.query.queryParams) {
+      next()
+      return
+    }
+    const { queryParams } = to.query
+    this.queryCondition = queryParams
+    this.queryBlogList()
+    this.queryCondition = ''
+    next()
   },
 
   methods: {
     queryBlogList(pageNo) {
+      if(this.queryCondition && this.queryCondition === this.$route.query.queryParams) return
+      if(!pageNo) pageNo = this.currentPage
       this.$loading.show()
       this.queryParams.rowsPerPage = this.pageSize
       this.queryParams.pageNo = pageNo - 1
@@ -91,6 +108,7 @@ export default {
         this.$loading.hide()
         this.currentPage = pageNo
         this.totalPages = Math.ceil(data.totalRows / this.pageSize)
+        this.queryCondition && this.$router.push( { path: '', query: { queryParams: this.queryCondition } })
       }).catch(err => {
         console.error(err)
         this.$nextTick().then(this.$loading.hide())
