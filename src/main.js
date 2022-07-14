@@ -12,7 +12,7 @@ import 'codemirror/lib/codemirror.css'; // Editor's Dependency Style
 import 'highlight.js/styles/github.css'; // HighLight.js' Dependency Style
 import 'tocbot/dist/styles.css'
 import 'tocbot/dist/tocbot.css'
-import '@/css/bs-theme.css'
+import '@/style/bs-theme.css'
 import '@/style/global.css'
 
 Vue.config.productionTip = false

@@ -1,15 +1,15 @@
 <template>  
   <div id="app">
-    <header class="p-2 bg-dark bg-gradient text-white shadow position-fixed top-0 w-100">
-      <div class="container">
-        <div class="row w-100 flex-wrap align-items-center justify-content-center position-relative">
+    <header class="p-3 bg-dark bg-gradient text-white shadow position-fixed top-0 w-100">
+      <div class="container ignore">
+        <div class="row w-100 flex-wrap align-items-center justify-content-center position-relative g-0">
           <div class="menu position-absolute left-0 d-lg-none" @click="sideNav = true">
             <i class="bi bi-list fs-3"></i>
           </div>
-          <div class="col-auto col-lg-3 ps-4">
+          <div class="col-auto col-lg-3">
             <div class="logo">
               <!-- <img class="mb-1" src="./assets/home-logo.png" alt="load failed"> -->
-              <div class="ms-2 fs-4 fw-bold">XueclLab</div>
+              <div class="fs-4 fw-bold">XueclLab</div>
             </div>
           </div>
           <ul class="nav col-6 justify-content-center fs-6 m-auto d-none d-lg-flex">
@@ -66,6 +66,10 @@ export default {
 header {
   font-size: 1.2em;
   z-index: 10;
+}
+
+header .container.ignore {
+  max-width: 1024px;
 }
 
 .menu {

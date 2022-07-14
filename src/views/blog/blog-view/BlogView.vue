@@ -94,13 +94,19 @@ export default {
 </script>
 
 <style scoped>
+  .container {
+    max-width: 1024px;
+  }
+
   .header .article-title {
     text-align: center;
   }
+
   .btn-row {
     display: block;
     text-align: right;
   }
+
   /deep/ .tui-editor-contents ol > li::before {
     margin-left: -2.2em;
     width: 2em;

@@ -1,7 +1,7 @@
 <template>  
   <div class="container position-relative p-0 ignore">
-    <div class="row w-100 gx-0 gx-md-5 me-5">
-      <div class="col-12 col-lg-7 article">
+    <div class="row w-100 gx-0">
+      <div class="col-12 col-lg-8 me-auto pe-lg-5 article">
         <form class="d-lg-none input-group mb-3 position-sticky start-0 px-2" @submit.prevent="queryBlogList(1)">
           <input type="text" class="form-control" v-model="queryCondition" placeholder="输入关键词查询">
           <button class="btn btn-dark text-light" type="button">查询</button>
@@ -9,7 +9,7 @@
         <article-card class="mb-3" :articleList="blogList" @article-view="toBlogView"></article-card>
         <pagination :total-pages="totalPages" :current-page="currentPage" @click="queryBlogList"></pagination>
       </div>
-      <div class="col-5 index d-none d-lg-block">
+      <div class="col-4 index d-none d-lg-block">
         <div class="card-body">
           <form class="input-group mb-5" @submit.prevent="queryBlogList(1)">
             <input type="text" class="form-control" v-model="queryCondition" placeholder="输入关键词查询">
@@ -105,8 +105,9 @@ export default {
 </script>
 
 <style scoped>
-  .container {
+  .container.ignore {
     display: flex;
+    max-width: 1024px;
   }
 
   .quick-add-btn:hover {

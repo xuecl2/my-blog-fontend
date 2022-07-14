@@ -1,10 +1,10 @@
 <template>
   <div class="article-card-container position-relative">
-    <div class="card article-card mb-1" v-for="item in newArticleList" :key="item.id" @click="articleView(item.id)">
+    <div class="card article-card pb-3 mb-3" v-for="item in newArticleList" :key="item.id" @click="articleView(item.id)">
       <div class="card-body py-2">
-        <div class="content-title fw-bolder">{{item.blogTitle}}</div>
-        <div class="time">{{item.createDate | timeFormatter}}</div>
-        <div class="digest fw-bold">{{item.blogDigest}}</div>
+        <div class="content-title mb-2 text-danger fw-bolder">{{item.blogTitle}}</div>
+        <div class="time mb-2">{{item.createDate | timeFormatter}}</div>
+        <div class="digest text-dark">{{item.blogDigest}}</div>
       </div>
     </div>
     <div class="position-absolute card article-card mb-1 ignore invisible">
@@ -77,12 +77,14 @@ export default {
   }
 
   .time {
-    font-size: .8em;
-    font-weight: light;
+    font-size: .9em;
     font-style: italic;
+    font-weight: light;
+    color: #888;
   }
 
   .digest {
-    font-size: 1em;
+    font-size: 1.1em;
+    line-height: 1.8;
   }
 </style>
