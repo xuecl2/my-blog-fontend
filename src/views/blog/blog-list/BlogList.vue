@@ -74,13 +74,14 @@ export default {
   },
 
   created() {
+    console.log('created')
     const { queryParams } = this.$route.query
     this.queryCondition = queryParams
     this.queryBlogList()
-    this.queryCondition = ''
   },
 
   beforeRouteUpdate(to, from ,next) {
+    console.log('update')
     if(this.queryCondition === to.query.queryParams) {
       next()
       return
@@ -88,13 +89,11 @@ export default {
     const { queryParams } = to.query
     this.queryCondition = queryParams
     this.queryBlogList()
-    this.queryCondition = ''
     next()
   },
 
   methods: {
     queryBlogList(pageNo) {
-      if(this.queryCondition && this.queryCondition === this.$route.query.queryParams) return
       if(!pageNo) pageNo = this.currentPage
       this.$loading.show()
       this.queryParams.rowsPerPage = this.pageSize
@@ -108,7 +107,7 @@ export default {
         this.$loading.hide()
         this.currentPage = pageNo
         this.totalPages = Math.ceil(data.totalRows / this.pageSize)
-        this.queryCondition && this.$router.push( { path: '', query: { queryParams: this.queryCondition } })
+        this.queryCondition !== this.$route.query.queryParams && this.queryCondition && this.$router.push( { path: '', query: { queryParams: this.queryCondition } })
       }).catch(err => {
         console.error(err)
         this.$nextTick().then(this.$loading.hide())
