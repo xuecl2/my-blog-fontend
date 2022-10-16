@@ -74,22 +74,17 @@ export default {
   },
 
   created() {
-    console.log('created')
     const { queryParams } = this.$route.query
     this.queryCondition = queryParams
     this.queryBlogList()
   },
 
   beforeRouteUpdate(to, from ,next) {
-    console.log('update')
-    if(this.queryCondition === to.query.queryParams) {
-      next()
-      return
-    }
+    next()
+    if(this.queryCondition === to.query.queryParams) return
     const { queryParams } = to.query
     this.queryCondition = queryParams
     this.queryBlogList()
-    next()
   },
 
   methods: {

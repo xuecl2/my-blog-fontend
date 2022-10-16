@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col me-end">
-        <div class="ms-3 fs-4 fw-bolder ">{{ blogObject.title }}</div>
+        <div class="ms-3 fs-4 fw-bolder">{{ blogObject.title }}</div>
       </div>
       <div class="col-auto">
         <div class="btn-group btn-row mb-1" role="group" aria-label="Basic example">
@@ -28,7 +28,7 @@ import utils from "@/utils/commonUtils";
 import { Pic } from "@/global/globalConsts.js";
 import { queryDetailBlogInfo } from "@/api/blog.js";
 import { saveBlog } from "@/api/blog.js";
-import { uploadFile } from "@/api/blog.js";
+import { uploadFile } from "@/api/file.js";
 
 export default {
   name: "EditBlog",

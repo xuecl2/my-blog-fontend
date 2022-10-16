@@ -1,7 +1,7 @@
 export class queryBlogListRequest {
   constructor(params) {
     this.config = {
-      requsetPath: '',
+      url: 'blog',
       requestMethod: 'post'
     }
     this.data = {
@@ -23,7 +23,7 @@ export class queryBlogListRequest {
 export class queryDetailBlogInfo {
   constructor(params) {
     this.config = {
-      requsetPath: '',
+      url: 'blog',
       requestMethod: 'post'
     }
     this.data = {
@@ -39,7 +39,7 @@ export class queryDetailBlogInfo {
 export class saveBlog {
   constructor(params) {
     this.config = {
-      requsetPath: '',
+      url: 'blog',
       requestMethod: 'post'
     }
     this.data = {
@@ -60,7 +60,7 @@ export class saveBlog {
 export class deleteBlog {
   constructor(params) {
     this.config = {
-      requsetPath: '',
+      url: 'blog',
       requestMethod: 'post'
     }
     this.data = {
@@ -72,32 +72,3 @@ export class deleteBlog {
     }
   }
 }
-/* eslint-disable */
-export class uploadFile {
-  constructor(params) {
-    this.config = {
-      requsetPath: '',
-      requestMethod: 'post',
-      baseURL: envConfig.fileUploadUrl,
-      url: params.id.toString(),
-    }
-    this.data = new FormData()
-    this.data.append('file',params.file)
-    this.data.append('name',params.filename)
-  }
-}
-
-export class deleteFile {
-  constructor(params) {
-    this.config = {
-      requsetPath: '',
-      requestMethod: 'post',
-      baseURL: envConfig.fileDeleteUrl,
-    }
-    this.data = {
-      filename: params.filename,
-      id: params.id
-    }
-  }
-}
-/* eslint-enable */
