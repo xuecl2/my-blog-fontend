@@ -1,11 +1,11 @@
 export class queryBlogListRequest {
   constructor(params) {
     this.config = {
-      url: 'blog',
+      url: 'article',
       requestMethod: 'post'
     }
     this.data = {
-      tradeCode: 'blogHandle',
+      tradeCode: 'articleHandler',
       data: {
         operation: 'query',
         title: params.title,
@@ -23,11 +23,11 @@ export class queryBlogListRequest {
 export class queryDetailBlogInfo {
   constructor(params) {
     this.config = {
-      url: 'blog',
+      url: 'article',
       requestMethod: 'post'
     }
     this.data = {
-      tradeCode: 'blogHandle',
+      tradeCode: 'articleHandler',
       data: {
         operation: 'queryById',
         id: params.id,
@@ -39,11 +39,11 @@ export class queryDetailBlogInfo {
 export class saveBlog {
   constructor(params) {
     this.config = {
-      url: 'blog',
+      url: 'article',
       requestMethod: 'post'
     }
     this.data = {
-      tradeCode: 'blogHandle',
+      tradeCode: 'articleHandler',
       data: {
         operation: 'save',
         id: params.id,
@@ -60,11 +60,11 @@ export class saveBlog {
 export class deleteBlog {
   constructor(params) {
     this.config = {
-      url: 'blog',
+      url: 'article',
       requestMethod: 'post'
     }
     this.data = {
-      tradeCode: 'blogHandle',
+      tradeCode: 'articleHandler',
       data: {
         operation: 'delete',
         id: params.id,

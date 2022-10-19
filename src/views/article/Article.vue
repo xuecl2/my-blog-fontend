@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'Blog', 
+  name: 'Article', 
 
   data() {
     return {

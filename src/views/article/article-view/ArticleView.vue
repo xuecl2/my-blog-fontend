@@ -24,15 +24,15 @@
 
 <script>
 // @ is an alias to /src
-import BlogModificationDialog from '@/views/blog/components/BlogModificationDialog'
+import BlogModificationDialog from '@/views/article/components/ArticleModificationDialog'
 import TuiViewer from '@/components/TuiViewer.vue'
 import request from '@/request/commonRequest.js'
 import utils from '@/utils/commonUtils'
-import {queryDetailBlogInfo} from '@/api/blog.js'
-import {deleteBlog} from '@/api/blog.js'
+import {queryDetailBlogInfo} from '@/api/article.js'
+import {deleteBlog} from '@/api/article.js'
 
 export default {
-  name: 'BlogView',
+  name: 'ArticleView',
   components: {
     TuiViewer,BlogModificationDialog
   },

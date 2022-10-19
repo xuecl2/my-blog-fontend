@@ -34,7 +34,7 @@
 <script>
 import request from '@/request/commonRequest'
 import utils from '@/utils/commonUtils'
-import {saveBlog} from '@/api/blog.js'
+import {saveBlog} from '@/api/article.js'
 
 const operationMap = {
   add: '新增文章',

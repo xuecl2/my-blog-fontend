@@ -1,4 +1,4 @@
-# my-blog
+# xlab
 
 ## Project setup
 ```

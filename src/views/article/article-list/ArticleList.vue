@@ -28,15 +28,15 @@
 </template>
 
 <script>
-import {queryBlogListRequest} from '@/api/blog.js'
+import {queryBlogListRequest} from '@/api/article.js'
 import request from '@/request/commonRequest'
 import ArticleCard from './component/ArticleCard.vue'
-import BlogModificationDialog from '@/views/blog/components/BlogModificationDialog'
+import BlogModificationDialog from '@/views/article/components/ArticleModificationDialog'
 import Pagination from '@/components/Pagination'
 import DirTree from '@/components/DirTree'
 
 export default {
-  name: 'BlogList',  
+  name: 'ArticleList',  
 
   components: { ArticleCard, BlogModificationDialog, Pagination, DirTree },
   

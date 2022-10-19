@@ -26,8 +26,8 @@ import TuiEditor from "@/components/TuiEditor.vue";
 import request from "@/request/commonRequest.js";
 import utils from "@/utils/commonUtils";
 import { Pic } from "@/global/globalConsts.js";
-import { queryDetailBlogInfo } from "@/api/blog.js";
-import { saveBlog } from "@/api/blog.js";
+import { queryDetailBlogInfo } from "@/api/article.js";
+import { saveBlog } from "@/api/article.js";
 import { uploadFile } from "@/api/file.js";
 
 export default {

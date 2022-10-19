@@ -7,19 +7,19 @@ Vue.use(VueRouter)
 const routes = [
   { 
     path: '/', 
-    redirect: '/blog',
+    redirect: '/article',
   },
 
   { 
     path: '/login/:name', 
     props: true,
     name: 'Login',
-    component: () => import(/* webpackChunkName: "blog" */ '../views/Login.vue'),
+    component: () => import(/* webpackChunkName: "article" */ '../views/Login.vue'),
   },
 
   {
-    path: '/blog',
-    component: () => import(/* webpackChunkName: "blog" */ '../views/blog/Blog.vue'),
+    path: '/article',
+    component: () => import(/* webpackChunkName: "article" */ '../views/article/Article.vue'),
     children: [
       {
         path: '',
@@ -28,22 +28,22 @@ const routes = [
 
       {
         path: 'list',
-        name: 'BlogList',
-        component: () => import(/* webpackChunkName: "blog-list" */ '../views/blog/blog-list/BlogList.vue')
+        name: 'ArticleList',
+        component: () => import(/* webpackChunkName: "article-list" */ '../views/article/article-list/ArticleList.vue')
       },
 
       {
         path: 'view/:blogid',
-        name: 'BlogView',
+        name: 'ArticleView',
         props: true,
-        component: () => import(/* webpackChunkName: "blog-view" */ '../views/blog/blog-view/BlogView.vue')
+        component: () => import(/* webpackChunkName: "article-view" */ '../views/article/article-view/ArticleView.vue')
       },
 
       {
         path: 'edit/:blogid',
-        name: 'BlogEdit',
+        name: 'ArticleEdit',
         props: true,
-        component: () => import(/* webpackChunkName: "blog-edit" */ '../views/blog/blog-edit/BlogEdit.vue')
+        component: () => import(/* webpackChunkName: "article-edit" */ '../views/article/article-edit/ArticleEdit.vue')
       },
     ]
   },

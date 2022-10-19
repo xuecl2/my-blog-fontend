@@ -11,8 +11,8 @@
 import request from '@/request/commonRequest.js'
 import uploader from '@/components/MyUploader.vue'
 import {Pic} from '@/global/globalConsts.js'
-import {uploadFile} from '@/api/blog'
-import {deleteFile} from '@/api/blog'
+import {uploadFile} from '@/api/article'
+import {deleteFile} from '@/api/article'
 
 export default {
   name: 'PictureWall',
