@@ -77,9 +77,10 @@ export default {
 .arrow {
   cursor: pointer;
   transition: all 0.3s ease;
+  transform: rotate(-90deg);
 }
 
 .arrow.active {
-  transform: rotate(-90deg);
+  transform: rotate(0);
 }
 </style>
