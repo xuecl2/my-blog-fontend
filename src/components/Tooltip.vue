@@ -30,6 +30,7 @@ export default {
     return {
       popperInstance: null,
       isTooltipShow: false,
+      stateChangeLock: false,
     }
   }, 
 
@@ -37,7 +38,7 @@ export default {
     // const tooltip = this.$refs.tooltip
     const reference = this.$refs.reference
     if(this.triggerMethod === 'click') {
-      reference.addEventListener('click', this.toggleTooltipShow)
+      reference.addEventListener('click', this.showTooltip)
     }
 
     this.popperInstance = createPopper(reference, this.$refs.tooltip, {
@@ -55,10 +56,12 @@ export default {
     }) 
   }, 
 
+  beforeDestroy() {
+    document.removeEventListener('click', this.hideTooltip, true)
+  },
+
   methods: {
-    toggleTooltipShow(evt) {
-      evt.stopPr
-      console.log(this.isTooltipShow)
+    toggleTooltipShow() {
       if(!this.isTooltipShow) {
         this.showTooltip()
       }else {
@@ -66,7 +69,15 @@ export default {
       }
     },
 
+    addStateChangeLock(interval = 100) {
+      this.stateChangeLock = true
+      setTimeout(() => {
+        this.stateChangeLock = false 
+      }, interval)
+    },
+
     showTooltip() {
+      if(this.stateChangeLock) return
       this.isTooltipShow = true
       // Enable the event listeners
       this.popperInstance.setOptions((options) => ({
@@ -77,10 +88,14 @@ export default {
         ],
       }))
       this.popperInstance.update()
-      this.emit('state-change', { isTooltipShow: this.isTooltipShow })
+      this.$emit('state-change', { isTooltipShow: this.isTooltipShow })
+      document.addEventListener('click', this.hideTooltip, true)
+      this.$refs.reference.removeEventListener('click', this.showTooltip)
+      this.addStateChangeLock()
     },
 
     hideTooltip() {
+      if(this.stateChangeLock) return
       this.isTooltipShow = false
       // Disable the event listeners
       this.popperInstance.setOptions((options) => ({
@@ -90,7 +105,10 @@ export default {
           { name: 'eventListeners', enabled: false },
         ],
       }))
-      this.emit('state-change', { isTooltipShow: this.isTooltipShow })
+      this.$emit('state-change', { isTooltipShow: this.isTooltipShow })
+      document.removeEventListener('click', this.hideTooltip, true)
+      this.$refs.reference.addEventListener('click', this.showTooltip)
+      this.addStateChangeLock()
     },
   },
 }

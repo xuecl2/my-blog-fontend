@@ -6,10 +6,12 @@
         <a class="dir-name fs-6 text-dark me-auto" href="#" @click.stop.prevent="gotoCategory(dir.name)">{{dir.name}}</a>
         <span class="articles me-2">{{ dir.aritcles }}</span>
         <i v-show="dir.subList.length > 0" class="bi bi-chevron-down arrow me-3" :class="{'active': subListShown[index]}"></i>
-        <slot :dir="dir" :index="index"></slot>
+        <slot :dir="dir"></slot>
       </div>
       <dir-tree class="ms-2" v-show="subListShown[index]" :dir-list="dir.subList">
-        <slot :dir="dir" :index="index"></slot>
+        <template #default="{ dir }">
+          <slot :dir="dir"></slot>
+        </template>
       </dir-tree>
     </li>
   </ul>

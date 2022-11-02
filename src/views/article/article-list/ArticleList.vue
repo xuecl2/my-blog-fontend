@@ -52,16 +52,20 @@ export default {
       totalPages: 0,
       dirList: [
         {
+          id: 0,
           name: 'defalut', 
           subList: [],
         },
         {
+          id: 1,
           name: 'list',
           subList: [
             {
+              id: 2,
               name: 'list1',
               subList: [
                 {
+                  id: 3,
                   name: 'list2',
                   subList: [],
                 }

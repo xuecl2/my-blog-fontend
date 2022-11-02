@@ -1,6 +1,6 @@
 <template>
   <div class="select-menu" :class="{ 'active': showOptions }">
-    <div class="select-btn py-1 px-3 mb-3" @click="toggleOptionsShow()">
+    <div class="select-btn w-100 py-2 px-3 mb-3" @click="toggleOptionsShow()">
       <span>{{ (selectedOption && selectedOption.value) || '请选择'}}</span>
       <i class="bi bi-chevron-right me-2"></i>
     </div>
@@ -83,7 +83,6 @@ export default {
 .select-menu .select-btn {
   position: relative;
   min-width: 200px;
-  width: 400px;
   border: 1px solid #ced4da;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0,0,0,.1);
