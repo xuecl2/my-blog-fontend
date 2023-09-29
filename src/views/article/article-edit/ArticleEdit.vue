@@ -23,12 +23,9 @@
 <script>
 // @ is an alias to /src
 import TuiEditor from "@/components/TuiEditor.vue";
-import request from "@/request/commonRequest.js";
 import utils from "@/utils/commonUtils";
-import { Pic } from "@/global/globalConsts.js";
-import { queryDetailBlogInfo } from "@/api/article.js";
-import { saveBlog } from "@/api/article.js";
-import { uploadFile } from "@/api/file.js";
+import articlApi from '@/api/article.js'
+import fileApi from '@/api/file.js'
 
 export default {
   name: "EditBlog",
@@ -68,41 +65,39 @@ export default {
     back() {
       this.$router.push({ name: "BlogView", params: { blogid: this.blogid } });
     },
+
     save() {
       this.blogObject.content = this.$refs.editor.getMarkdown();
       let requestData = JSON.parse(JSON.stringify(this.blogObject));
       requestData.user = "xuecl";
-      request(new saveBlog(requestData)).then(() => {
-        console.log(this)
-        this.$toast.success("保存成功！");
-      });
+      articlApi.updateArticle({
+        ...requestData,
+        id: this.id,
+      })
+        .then(() => {
+          this.$toast.success("保存成功！");
+        })
     },
+
     refresh() {
-      request(new queryDetailBlogInfo({ id: this.id })).then(
-        ({ blogObject }) => {
+      articlApi.getArticleDetail(this.id)
+        .then(data => {
           this.blogObject = {
             id: blogObject.id,
             title: blogObject.blogTitle,
             keyWord: blogObject.blogKeyWord,
             content: blogObject.blogContent,
             digest: blogObject.blogDigest,
-          };
-          this.$refs.editor.setMarkdown(this.blogObject.content);
-          /* eslint-disable */
-          this.fileList = [];
-          blogObject.fileList.forEach((element) => {
-            let arrayTmp = element.split("=");
-            let filename = decodeURIComponent(arrayTmp[arrayTmp.length - 1]);
-            let pic = new Pic();
-            pic.downloadUrl = envConfig.baseUrl + element;
-            pic.uploadName = filename;
-            pic.id = pic.id + filename;
-            this.fileList.push(pic);
-          });
-          /* eslint-enable */
-        }
-      );
+          }
+          this.$refs.editor.setMarkdown(this.blogObject.content)
+          this.$loading.hide()
+        })
+        .catch(err => {
+          console.error(err)
+          this.$loading.hide()
+        })
     },
+
     tuiSaveShortcutsReplace(event) {
       if (event.ctrlKey && event.keyCode == 83) {
         this.save();
@@ -110,6 +105,7 @@ export default {
         event.stopImmediatePropagation();
       }
     },
+
     tuiFocusHandler() {
       window.addEventListener("keydown", this.tuiSaveShortcutsReplace, true);
     },
@@ -117,20 +113,17 @@ export default {
       window.removeEventListener("keydown", this.tuiSaveShortcutsReplace, true);
     },
     tuiImgUploadHandler(file) {
-      let fileObject = {
-        filename: file.name + new Date().getTime() + (Math.random() * 1000000).toFixed() ,
-        file: file
-      }
+      const filename = file.name + new Date().getTime() + (Math.random() * 1000000).toFixed();
       this.$loading.show()
-      request(new uploadFile({...fileObject,id: this.id})).then(data => {
-        /* eslint-disable */
-        // 加上图片的文本后，编辑器在加载图片的一瞬间游标的位置会变的很奇怪(后面随便手动输入点东西就能恢复)。下面代码的最后加上空格是为了解决这个问题，具体原因尚不清楚
-        this.$refs.editor.setMarkdown(this.$refs.editor.getMarkdown() + utils.getImgMarkdownString(envConfig.baseUrl + data.url, file.name) + ' ')
-        /* eslint-enable */
-        this.$loading.hide()
-      }).catch( () => {
-        this.$nextTick(() => {this.$loading.hide()})
-      })
+      fileApi.uploadFile(`imgs/${this.id}/${filename}`, file)
+        .then(() => {
+          this.$loading.hide()
+          // 加上图片的文本后，编辑器在加载图片的一瞬间游标的位置会变的很奇怪(后面随便手动输入点东西就能恢复)。下面代码的最后加上空格是为了解决这个问题，具体原因尚不清楚
+          this.$refs.editor.setMarkdown(this.$refs.editor.getMarkdown() + utils.getImgMarkdownString(window.envConfig.baseUrl + filename, file.name) + ' ')
+        })
+        .catch( () => {
+          this.$nextTick(() => {this.$loading.hide()})
+        })
     },
     submitCompletedCheck() {
       let flag = true;

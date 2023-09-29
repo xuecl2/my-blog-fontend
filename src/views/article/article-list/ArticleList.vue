@@ -28,8 +28,7 @@
 </template>
 
 <script>
-import {queryBlogListRequest} from '@/api/article.js'
-import request from '@/request/commonRequest'
+import * as articlApi from '@/api/article.js'
 import ArticleCard from './component/ArticleCard.vue'
 import BlogModificationDialog from '@/views/article/components/ArticleModificationDialog'
 import Pagination from '@/components/Pagination'
@@ -95,22 +94,21 @@ export default {
     queryBlogList(pageNo) {
       if(!pageNo) pageNo = this.currentPage
       this.$loading.show()
-      this.queryParams.rowsPerPage = this.pageSize
-      this.queryParams.pageNo = pageNo - 1
-      this.queryParams.queryCondition = this.queryCondition
-      request(new queryBlogListRequest(this.queryParams)).then(data => {
-        this.blogList = data.resultList
-        if(this.blogList.length == 0){
-          this.$toast.warning('无满足条件的记录')
-        }
-        this.$loading.hide()
-        this.currentPage = pageNo
-        this.totalPages = Math.ceil(data.totalRows / this.pageSize)
-        this.queryCondition !== this.$route.query.queryParams && this.queryCondition && this.$router.push( { path: '', query: { queryParams: this.queryCondition } })
-      }).catch(err => {
-        console.error(err)
-        this.$nextTick().then(this.$loading.hide())
-      })
+      articlApi.queryArticleList(pageNo - 1, this.pageSize, this.queryCondition)
+        .then(data => {
+          this.blogList = data.resultList
+          if(this.blogList.length == 0){
+            this.$toast.warning('无满足条件的记录')
+          }
+          this.$loading.hide()
+          this.currentPage = pageNo
+          this.totalPages = Math.ceil(data.totalRows / this.pageSize)
+          this.queryCondition !== this.$route.query.queryParams && this.queryCondition && this.$router.push( { path: '', query: { queryParams: this.queryCondition } })
+        })
+        .catch(err => {
+          console.error(err)
+          this.$nextTick().then(this.$loading.hide())
+        })
     },
 
     toBlogView(id) {

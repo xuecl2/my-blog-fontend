@@ -1,6 +1,6 @@
 <template>
   <div class="select-menu" :class="{ 'active': showOptions }">
-    <div class="select-btn w-100 py-2 px-3 mb-3" @click="toggleOptionsShow()">
+    <div class="select-btn w-100 mb-3" @click="toggleOptionsShow()">
       <span>{{ (selectedOption && selectedOption.value) || '请选择'}}</span>
       <i class="bi bi-chevron-right me-2"></i>
     </div>
@@ -65,9 +65,11 @@ export default {
     toggleOptionsShow() {
       if(this.showOptions) {
         this.showOptions = false
+        document.removeEventListener('click', this.toggleOptionsShow, true)
       }else {
         this.currentOptionsList = [this.options]
         this.showOptions = true
+        document.addEventListener('click', this.toggleOptionsShow, true)
       }
     },
 
@@ -83,10 +85,18 @@ export default {
 .select-menu .select-btn {
   position: relative;
   min-width: 200px;
+  color: #212529;
+  font-size: 1rem;
+  font-weight: 400;
+  padding: .375rem .75rem;
   border: 1px solid #ced4da;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0,0,0,.1);
+  border-radius: 0.25rem;
+  /* box-shadow: 0 0 10px rgba(0,0,0,.1); */
   cursor: pointer;
+}
+
+.select-menu.active .select-btn {
+  box-shadow: 0 0 0 0.1rem rgb(13 110 253 / 25%);
 }
 
 .select-btn i {
@@ -106,6 +116,7 @@ export default {
   opacity: 0;
   transform: translateY(-10px);
   transition: all ease-in .3s;
+  pointer-events: none;
 }
 
 .options {
@@ -134,5 +145,6 @@ export default {
 .select-menu.active .options-box {
   opacity: 1;
   transform: translateY(0);
+  pointer-events: all;
 }
 </style>

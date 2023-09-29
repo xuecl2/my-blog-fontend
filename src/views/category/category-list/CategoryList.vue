@@ -40,6 +40,8 @@
 import DirTree from '@/components/DirTree'
 import Tooltip from '@/components/Tooltip'
 import CategoryEditDialog from '@/views/category/category-list/component/CategoryEditDialog'
+import request from '@/request/commonRequest'
+import { queryAllCategoryReq } from '@/api/category'
 
 export default {
   name: 'CategoryList', 
@@ -84,9 +86,13 @@ export default {
     }
   },
 
+  mounted() {
+    this.refreshCategoryList()
+  },
+
   methods: {
     refreshCategoryList() {
-
+      request(new queryAllCategoryReq()).then(rsp => console.log(rsp))
     },
 
     tooltipStateChangeHandler(dir, state) {
