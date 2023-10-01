@@ -1,74 +1,21 @@
-export class queryBlogListRequest {
-  constructor(params) {
-    this.config = {
-      url: 'article',
-      requestMethod: 'post'
-    }
-    this.data = {
-      tradeCode: 'articleHandler',
-      data: {
-        operation: 'query',
-        title: params.title,
-        keyWord: params.keyWord,
-        startModifyDate: params.startModifyDate,
-        endModifyDate: params.endModifyDate,
-        queryCondition: params.queryCondition,
-        pageNo: params.pageNo,
-        rowsPerPage: params.rowsPerPage,
-      }
-    }
-  }
+import request  from "@/utils/request.js"
+
+export function addArticle(article) {
+  return request('article/add', { article })
 }
 
-export class queryDetailBlogInfo {
-  constructor(params) {
-    this.config = {
-      url: 'article',
-      requestMethod: 'post'
-    }
-    this.data = {
-      tradeCode: 'articleHandler',
-      data: {
-        operation: 'queryById',
-        id: params.id,
-      }
-    }
-  }
+export function queryArticleList(startPage, pageSize, queryParams) {
+  return request('article/query', { startPage, pageSize, queryParams })
 }
 
-export class saveBlog {
-  constructor(params) {
-    this.config = {
-      url: 'article',
-      requestMethod: 'post'
-    }
-    this.data = {
-      tradeCode: 'articleHandler',
-      data: {
-        operation: 'save',
-        id: params.id,
-        title: params.title,
-        keyWord: params.keyWord,
-        content: params.content,
-        digest: params.digest,
-        user: params.user,
-      }
-    }
-  }
+export function getArticleDetail(id) {
+  return request('article/detail', { id })
 }
 
-export class deleteBlog {
-  constructor(params) {
-    this.config = {
-      url: 'article',
-      requestMethod: 'post'
-    }
-    this.data = {
-      tradeCode: 'articleHandler',
-      data: {
-        operation: 'delete',
-        id: params.id,
-      }
-    }
-  }
+export function updateArticle(article) {
+  return request('article/update', { article })
+}
+
+export function deleteArticle(id) {
+  return request('article/delete', { id })
 }

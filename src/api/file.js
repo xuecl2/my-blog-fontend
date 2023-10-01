@@ -1,10 +1,8 @@
-export class uploadFile {
-  constructor(params) {
-    this.config = {
-      url: 'file/imgUpload' + params.id,
-    }
-    this.data = new FormData()
-    this.data.append('file',params.file)
-    this.data.append('name',params.filename)
-  }
+import request  from "@/utils/request.js"
+
+export function uploadFile(filename, file) {
+  const data = new FormData()
+  data.filename = filename
+  data.file = file
+  return request('file/upload', data)
 }
