@@ -4,7 +4,7 @@
       <div class="modal-content">
         <div class="modal-header border-0 bg-gray-100">
           <h3 class="h5 text-uppercase modal-title" id="exampleModalLabel">{{operation | operationFilter}}</h3>
-          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" @click="cancel()"></button>
+          <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close" @click="closeDialog()"></button>
         </div>
         <div class="modal-body">
           <form>
@@ -23,9 +23,9 @@
             </div>
           </form>
         </div>
-        <div class="modal-footer border-0 bg-gray-100">
-          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal" @click="cancel()">取消</button>
-          <button class="btn btn-dark" type="button" @click="save()">确定</button>
+        <div class="modal-footer mt-5 border-0 bg-gray-100">
+          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal" @click="closeDialog()">取消</button>
+          <button class="btn btn-dark" type="button" @click="submit()">确定</button>
         </div>
       </div>
     </div>
@@ -33,9 +33,10 @@
 </template>
 
 <script>
-// import request from '@/request/commonRequest'
+import request from '@/request/commonRequest'
 // import utils from '@/utils/commonUtils'
 import MultiLevelSelect from '@/components/MultiLevelSelect'
+import { addCategoryReq } from '@/api/category'
 
 export default {  
   name: 'CategoryEditDialog',
@@ -114,13 +115,20 @@ export default {
   },
 
   methods: {
+    submit() {
+      if(this.operation === 'add') this.add()
+      if(this.operation === 'modify') this.modify() 
+    },
+
     add() {
-      let requestData = JSON.parse(JSON.stringify(this.blogObjectCopy))
-      requestData.user = 'xuecl'
-      // request(new saveBlog(requestData)).then((data) => {
-      //   this.$toast.success('添加成功！')
-      //   this.$router.push({name: 'BlogEdit', params: {blogid: data.id.toString()}})
-      // })
+      if(!this.categoryObjCopy.name) {
+        this.$toast.error('分类名称不能为空！')
+        return 
+      }
+      request(new addCategoryReq(this.categoryObjCopy.name, this.categoryObjCopy.pid)).then(() => {
+        this.$toast.success('添加成功！')
+        this.closeDialog()
+      })
     },
 
     modify() {
@@ -129,11 +137,11 @@ export default {
       // request(new saveBlog(requestData)).then(() => {
       //   this.$toast.success('修改成功')
       //   this.$emit('refresh')
-      //   this.cancel()
+      //   this.closeDialog()
       // })
     },
 
-    cancel() {
+    closeDialog() {
       this.$emit('update:dialogVisible', false)
     },
   },
