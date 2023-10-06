@@ -32,9 +32,8 @@
 </template>
 
 <script>
-import request from '@/request/commonRequest'
-import utils from '@/utils/commonUtils'
-import {saveBlog} from '@/api/article.js'
+import utils from '@/utils/common-utils'
+import * as articleApi from '@/api/article.js'
 
 const operationMap = {
   add: '新增文章',
@@ -93,20 +92,20 @@ export default {
     },
     add() {
       let requestData = JSON.parse(JSON.stringify(this.blogObjectCopy))
-      requestData.user = 'xuecl'
-      request(new saveBlog(requestData)).then((data) => {
-        this.$toast.success('添加成功！')
-        this.$router.push({name: 'BlogEdit', params: {blogid: data.id.toString()}})
-      })
+      articleApi.addArticle(requestData)
+        .then(data => {
+          this.$toast.success('添加成功！')
+          this.$router.push({name: 'BlogEdit', params: {blogid: data.id.toString()}})
+        })
     },
     modify() {
       let requestData = JSON.parse(JSON.stringify(this.blogObjectCopy))
-      requestData.user = 'xuecl'
-      request(new saveBlog(requestData)).then(() => {
-        this.$toast.success('修改成功')
-        this.$emit('refresh')
-        this.cancel()
-      })
+      articleApi.updateArticle(requestData)
+        .then(() => {
+          this.$toast.success('修改成功')
+          this.$emit('refresh')
+          this.cancel()
+        })
     },
     cancel() {
       // this.dialogVisible = false

@@ -19,36 +19,38 @@
 </template>
 
 <script>
-// import loginUser from '@/global/user'
+import * as userApi from '@/api/user'
+
 export default {
-  name: 'Login',
-
-  props:{
-    name: {type: String},
-  },
-
-  created() {
-    !this.name ?? this.$router.push('/')
-  },
+  name: 'login',
 
   data: function() {
     return {
+      name: '',
       passwd: '',
     }
   },
 
   methods: {
-    login(){
-      if(this.name === 'xuecl' && this.passwd === 'xueclling') {
-        this.$toast.success('登录成功,即将跳转到主页！')
-        const user = { name: 'xuecl' }
-        sessionStorage.setItem('user', JSON.stringify(user))
-        setTimeout(() => {
-          this.$router.push('/')
-        }, 2000);
-      }else{
-        this.$toast.warning('用户名或密码错误')
-      }
+    login() {
+      userApi.login(this.name, this.passwd)
+        .then(user => {
+          sessionStorage.setItem('user', JSON.stringify(user))
+          this.$toast.success('登录成功,即将跳转到主页！')
+          setTimeout(() => {
+            this.$router.push('/')
+          }, 2000);
+        })
+    },
+
+    register() {
+      userApi.register({
+        user: this.name,
+        password: this.passwd,
+        email: this.email,
+      }).then(() => {
+        this.$toast.success('注册成功，请至邮箱激活！')
+      })
     }
   }
 }

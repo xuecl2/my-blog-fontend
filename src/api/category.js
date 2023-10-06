@@ -1,57 +1,17 @@
-export class addCategoryReq {
-  constructor(categoryName, parentCategory) {
-    this.config = {
-      url: 'category',
-    }
-    this.data = {
-      tradeCode: 'add',
-      data: {
-        categoryName,
-        parentCategory,
-      }
-    }
-  }
+import request  from "@/utils/request.js"
+
+export function queryAllCategories() {
+  return request('category/query-all')
 }
 
-export class deleteCategoryReq {
-  constructor(id) {
-    this.config = {
-      url: 'category',
-    }
-    this.data = {
-      tradeCode: 'delete',
-      data: {
-        id,
-      }
-    }
-  }
+export function addCategory(category) {
+  return request('category/add', { category })
 }
 
-export class updateCategoryReq {
-  constructor(id, categoryName, parentCategory) {
-    this.config = {
-      url: 'category',
-    }
-    this.data = {
-      tradeCode: 'update',
-      data: {
-        id,
-        categoryName,
-        parentCategory,
-      }
-    }
-  }
+export function deleteCategory(id) {
+  return request('category/delete', { id })
 }
 
-export class queryAllCategoryReq {
-  constructor() {
-    this.config = {
-      url: 'category',
-    }
-    this.data = {
-      tradeCode: 'queryAll',
-      data: {
-      }
-    }
-  }
+export function updateCategory(category) {
+  return request('category/update', { category })
 }

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import * as articlApi from '@/api/article.js'
+import * as articleApi from '@/api/article.js'
 import ArticleCard from './component/ArticleCard.vue'
 import BlogModificationDialog from '@/views/article/components/ArticleModificationDialog'
 import Pagination from '@/components/Pagination'
@@ -94,7 +94,7 @@ export default {
     queryBlogList(pageNo) {
       if(!pageNo) pageNo = this.currentPage
       this.$loading.show()
-      articlApi.queryArticleList(pageNo - 1, this.pageSize, this.queryCondition)
+      articleApi.queryArticleList(pageNo - 1, this.pageSize, this.queryCondition)
         .then(data => {
           this.blogList = data.resultList
           if(this.blogList.length == 0){

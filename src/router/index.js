@@ -11,8 +11,7 @@ const routes = [
   },
 
   { 
-    path: '/login/:name', 
-    props: true,
+    path: '/login', 
     name: 'Login',
     component: () => import(/* webpackChunkName: "article" */ '../views/Login.vue'),
   },
@@ -63,11 +62,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "category-list" */ '../views/category/category-list/CategoryList.vue')
       },
 
-      // {
-      //   path: 'edit',
-      //   name: 'CategoryEdit',
-      //   component: () => import(/* webpackChunkName: "category-edit" */ '../views/category/category-edit/CategoryEdit.vue')
-      // },
+      {
+        path: 'edit',
+        name: 'CategoryEdit',
+        component: () => import(/* webpackChunkName: "category-edit" */ '../views/category/category-edit/CategoryEdit.vue')
+      },
     ]
   },
 

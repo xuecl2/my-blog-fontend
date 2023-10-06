@@ -33,10 +33,8 @@
 </template>
 
 <script>
-import request from '@/request/commonRequest'
-// import utils from '@/utils/commonUtils'
 import MultiLevelSelect from '@/components/MultiLevelSelect'
-import { addCategoryReq } from '@/api/category'
+import * as categoryApi from '@/api/category.js'
 
 export default {  
   name: 'CategoryEditDialog',
@@ -125,20 +123,21 @@ export default {
         this.$toast.error('分类名称不能为空！')
         return 
       }
-      request(new addCategoryReq(this.categoryObjCopy.name, this.categoryObjCopy.pid)).then(() => {
-        this.$toast.success('添加成功！')
-        this.closeDialog()
-      })
+      
+      categoryApi.addCategory(this.categoryObjCopy)
+        .then(() => {
+          this.$toast.success('添加成功！')
+          this.closeDialog()
+        })
     },
 
     modify() {
-      let requestData = JSON.parse(JSON.stringify(this.blogObjectCopy))
-      requestData.user = 'xuecl'
-      // request(new saveBlog(requestData)).then(() => {
-      //   this.$toast.success('修改成功')
-      //   this.$emit('refresh')
-      //   this.closeDialog()
-      // })
+      categoryApi.updateCategory(this.categoryObjCopy)
+        .then(() => {
+          this.$toast.success('修改成功！')
+          this.closeDialog()
+          this.$emit('refresh')
+        })
     },
 
     closeDialog() {

@@ -23,9 +23,9 @@
 <script>
 // @ is an alias to /src
 import TuiEditor from "@/components/TuiEditor.vue";
-import utils from "@/utils/commonUtils";
-import articlApi from '@/api/article.js'
-import fileApi from '@/api/file.js'
+import utils from "@/utils/common-utils";
+import * as fileApi from '@/api/file.js'
+import * as articleApi from '@/api/article.js'
 
 export default {
   name: "EditBlog",
@@ -70,7 +70,7 @@ export default {
       this.blogObject.content = this.$refs.editor.getMarkdown();
       let requestData = JSON.parse(JSON.stringify(this.blogObject));
       requestData.user = "xuecl";
-      articlApi.updateArticle({
+      articleApi.updateArticle({
         ...requestData,
         id: this.id,
       })
@@ -80,14 +80,14 @@ export default {
     },
 
     refresh() {
-      articlApi.getArticleDetail(this.id)
+      articleApi.getArticleDetail(this.id)
         .then(data => {
           this.blogObject = {
-            id: blogObject.id,
-            title: blogObject.blogTitle,
-            keyWord: blogObject.blogKeyWord,
-            content: blogObject.blogContent,
-            digest: blogObject.blogDigest,
+            id: data.id,
+            title: data.blogTitle,
+            keyWord: data.blogKeyWord,
+            content: data.blogContent,
+            digest: data.blogDigest,
           }
           this.$refs.editor.setMarkdown(this.blogObject.content)
           this.$loading.hide()

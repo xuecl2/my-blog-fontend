@@ -26,8 +26,8 @@
 // @ is an alias to /src
 import BlogModificationDialog from '@/views/article/components/ArticleModificationDialog'
 import TuiViewer from '@/components/TuiViewer.vue'
-import utils from '@/utils/commonUtils'
-import articlApi from '@/api/article.js'
+import utils from '@/utils/common-utils'
+import * as articleApi from '@/api/article.js'
 
 export default {
   name: 'ArticleView',
@@ -57,14 +57,14 @@ export default {
   methods:{
     refresh() {
       this.$loading.show()
-      articlApi.getArticleDetail(this.id)
+      articleApi.getArticleDetail(this.id)
         .then(data => {
           this.blogObject = {
-            id: blogObject.id,
-            title: blogObject.blogTitle,
-            keyWord: blogObject.blogKeyWord,
-            content: blogObject.blogContent,
-            digest: blogObject.blogDigest,
+            id: data.id,
+            title: data.blogTitle,
+            keyWord: data.blogKeyWord,
+            content: data.blogContent,
+            digest: data.blogDigest,
           }
           this.$refs.editor.setMarkdown(this.blogObject.content)
           this.$loading.hide()
@@ -83,7 +83,7 @@ export default {
     },
     remove() {
       this.$message('确定删除文章？', {buttonClose: true})
-        .then(() => articlApi.deleteArticle(this.id))
+        .then(() => articleApi.deleteArticle(this.id))
         .then(() => {
           this.$toast.success('删除成功')
           this.$router.push({name:'BlogList'})

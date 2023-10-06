@@ -1,7 +1,4 @@
 import {Modal as bsMessageBox} from 'bootstrap/dist/js/bootstrap.esm'
-// import {Toast as bsToast} from 'bootstrap/dist/js/bootstrap.esm'
-
-// document.body.appendChild(new DOMParser().parseFromString(`<div class="message-box-container position-absolute top-0 translate-middle-x start-50 p-3 w-100 h-100"></div>`, 'text/html').querySelector('.message-box-container'))
 
 function message(text, config) {
   return new Promise((resolve, reject) => {
