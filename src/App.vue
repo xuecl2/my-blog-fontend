@@ -20,6 +20,7 @@
           </ul>
           <div class="col-3 d-none d-lg-block text-end">
             <a v-if="user.name" href="#" class="text-decoration-none px-2 text-white">{{user.name}}</a>
+            <router-link v-else to="/user/login" class="text-decoration-none px-2 text-white border rounded-1 px-3 py-1" @click="toLogin()">login</router-link>
           </div>
         </div>
       </div>

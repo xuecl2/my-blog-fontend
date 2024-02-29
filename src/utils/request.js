@@ -9,6 +9,7 @@ const defaultConfig = {
   timeout: 30000,
   method: 'post',
   headers: {'Content-Type': 'application/json'},
+  withCredentials: true,
 }
 
 const request = (url, data, config) => {
@@ -37,11 +38,11 @@ function commonRequestErrorHandler(error) {
     throw error
   }
 
-  if(error.code.slice(-3) === errorCode.USER_NOT_LOGIN) {
-    message('用户未登录或登录超时，请重新登录！').then(() => router.push('/login'))
+  if(error.code.slice(-6) === errorCode.USER_NOT_LOGIN) {
+    message('用户未登录或登录超时，请重新登录！').then(() => router.push('/user/login'))
     throw error
   }
-
+  console.log('Request error', error.message)
   toast.error(error.message)
   throw error
 }
